@@ -9,16 +9,26 @@ class EndingsWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: endings.length,
-        itemBuilder: (context, index){
-          return Padding(
-              padding: const EdgeInsets.all(10),
-              child:  CustomText(text: endings[index], borderColor: Color(0XFF1074A5))
-          );
-        },
+    return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //TODO поменять на кнопку
+          CustomText(text: "Выйти в меню", borderColor: Color(0XFF1074A5)),
+          
+          ListView.builder(
+          scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: endings.length,
+            itemBuilder: (context, index){
+              return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child:  CustomText(text: endings[index], borderColor: Color(0XFF1074A5))
+              );
+            },
+          )
+        ],
+      )
     );
   }
 }
