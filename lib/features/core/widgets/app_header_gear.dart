@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppHeader extends StatelessWidget {
-  const AppHeader({super.key});
+class AppHeaderGear extends StatelessWidget {
+  const AppHeaderGear({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,16 @@ class AppHeader extends StatelessWidget {
           end: Alignment.centerRight,
         ).createShader(bounds),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image.asset(
               'assets/images/logo.png',
               width: 230,
+              fit: BoxFit.contain,
+            ),
+            Image.asset(
+              'assets/images/logo_settings.png',
+              width: 42,
               fit: BoxFit.contain,
             ),
           ],

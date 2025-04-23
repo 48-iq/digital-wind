@@ -16,7 +16,7 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const AppHeader(title: '[ NEO HISTORY ]'),
+            const AppHeader(),
             const SizedBox(height: 32),
             Expanded(
               child: SingleChildScrollView(
