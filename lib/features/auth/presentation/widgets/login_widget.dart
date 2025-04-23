@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../components/typed_text.dart';
+import '../../../core/components/typed_text.dart';
 import '../../data/store/auth_store.dart';
 
 class LoginWidget extends StatefulWidget {

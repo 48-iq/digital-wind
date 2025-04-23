@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'features/auth/data/store/auth_store.dart';
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/auth/presentation/pages/register_page.dart';
+import 'features/main_menu/presentation/pages/main_menu_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,8 +50,17 @@ class _AuthWrapperState extends State<AuthWrapper> {
     final authStore = Provider.of<AuthStore>(context);
 
     if (authStore.isAuthenticated) {
-      // Основной экран квеста после аутентификации
-      return const Placeholder();
+      return MainMenuPage(
+        onPlayPressed: () {
+
+        },
+        onEndingsPressed: () {
+
+        },
+        onLogoutPressed: () {
+
+        },
+      );
     }
 
     return showRegister
