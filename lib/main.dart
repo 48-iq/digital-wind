@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> test = ["концовка слона", 'концовка бурильщика'];
-    return Center( child:  AllEndingsPage(endings:  test));
+   /* List<String> test = ["концовка слона", 'концовка бурильщика'];
+    return Center( child:  AllEndingsPage(endings:  test));*/
     return ChangeNotifierProvider(
       create: (context) => AuthStore(),
       child: MaterialApp(
