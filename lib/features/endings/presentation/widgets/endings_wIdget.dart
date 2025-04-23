@@ -2,10 +2,14 @@ import 'package:digital_wind/features/endings/presentation/components/custom_tex
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../../core/components/button.dart';
+import '../../../core/widgets/app_header.dart';
+
 class EndingsWidget extends StatelessWidget{
+  final VoidCallback onExitPressed;
   final List<String> endings;
 
-  const EndingsWidget({super.key, required this.endings});
+  const EndingsWidget({super.key, required this.endings, required this.onExitPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +17,11 @@ class EndingsWidget extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //TODO поменять на кнопку
-          CustomText(text: "Выйти в меню", borderColor: Color(0XFF1074A5)),
+            Button(
+              text: 'Выйти',
+              borderColor: Colors.blue,
+              onPressed: onExitPressed,
+            ),
           
           ListView.builder(
           scrollDirection: Axis.vertical,
@@ -23,7 +30,7 @@ class EndingsWidget extends StatelessWidget{
             itemBuilder: (context, index){
               return Padding(
                   padding: const EdgeInsets.all(10),
-                  child:  CustomText(text: endings[index], borderColor: Color(0XFF1074A5))
+                  child:  CustomText(text: endings[index], borderColor: Color(0xFFB91354))
               );
             },
           )

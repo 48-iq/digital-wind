@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import '../api/auth_api.dart';
 import '../entities/auth_response.dart';
-import '../entities/login_request.dart';
-import '../entities/register_request.dart';
 import '../entities/user.dart';
 
 class AuthStore extends ChangeNotifier {

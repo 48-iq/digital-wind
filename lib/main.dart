@@ -58,10 +58,22 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
         },
         onEndingsPressed: () {
-
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => AllEndingsPage(
+                endings: ["концовка слона", 'концовка бурильщика'],
+                onExitPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          );
         },
-        onLogoutPressed: () {
-
+        onLogoutPressed: () async {
+          await authStore.logout();
+          if (mounted) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const AuthWrapper()),
+            );
+          }
         },
       );
     }
