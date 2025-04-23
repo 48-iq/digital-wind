@@ -19,8 +19,6 @@ class MainMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const AppHeader(),
-        const SizedBox(height: 40),
         Button(
           text: 'Играть',
           borderColor: const Color(0xFFB91354),

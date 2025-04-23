@@ -89,7 +89,6 @@ class _LoginWidgetState extends State<LoginWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // История сообщений
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: _messages
@@ -115,7 +114,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           TextSpan(
                             text: 'система',
                             style: const TextStyle(
-                                color: Colors.blue), // Синий цвет для системы
+                                color: Colors.blue),
                           ),
                           const TextSpan(
                               text: ']',
@@ -136,7 +135,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           TextSpan(
                             text: 'игрок',
                             style: const TextStyle(
-                                color: Color(0xFFB91354)), // Розовый цвет для игрока
+                                color: Color(0xFFB91354)),
                           ),
                           const TextSpan(
                               text: ']',
@@ -173,7 +172,6 @@ class _LoginWidgetState extends State<LoginWidget> {
           }).toList(),
         ),
 
-        // Поля ввода
         if (_showUsernameField)
           Row(
             children: [

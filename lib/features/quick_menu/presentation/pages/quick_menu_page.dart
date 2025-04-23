@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../../core/widgets/app_header.dart';
-import '../widgets/main_menu_widget.dart';
+import '../widgets/quick_menu_widget.dart';
 
-class MainMenuPage extends StatelessWidget {
-  final VoidCallback onPlayPressed;
-  final VoidCallback onEndingsPressed;
-  final VoidCallback onLogoutPressed;
+class QuickMenuPage extends StatelessWidget {
+  final VoidCallback onContinuePressed;
+  final VoidCallback onExitPressed;
 
-  const MainMenuPage({
+  const QuickMenuPage({
     super.key,
-    required this.onPlayPressed,
-    required this.onEndingsPressed,
-    required this.onLogoutPressed,
+    required this.onContinuePressed,
+    required this.onExitPressed,
   });
 
   @override
@@ -25,10 +23,9 @@ class MainMenuPage extends StatelessWidget {
             const AppHeader(),
             Padding(
               padding: const EdgeInsets.only(top: 40),
-              child: MainMenuWidget(
-                onPlayPressed: onPlayPressed,
-                onEndingsPressed: onEndingsPressed,
-                onLogoutPressed: onLogoutPressed,
+              child: QuickMenuWidget(
+                onContinuePressed: onContinuePressed,
+                onExitPressed: onExitPressed,
               ),
             ),
           ],
