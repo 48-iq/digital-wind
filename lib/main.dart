@@ -1,3 +1,4 @@
+import 'package:digital_wind/features/endings/presentation/pages/all_endings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'features/auth/data/store/auth_store.dart';
@@ -13,6 +14,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> test = ["концовка слона", 'концовка бурильщика'];
+    return Center( child:  AllEndingsPage(endings:  test));
     return ChangeNotifierProvider(
       create: (context) => AuthStore(),
       child: MaterialApp(

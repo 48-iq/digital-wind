@@ -5,6 +5,8 @@ class ApiConstants {
   static const String registerEndpoint = '/auth/register';
   static const String logoutEndpoint = '/auth/logout';
 
+  static const String endingsEndpoint = '/user/endings'; // нужно куда-то еще Id пользователя вставить
+
   static const Duration connectTimeout = Duration(seconds: 5);
   static const Duration receiveTimeout = Duration(seconds: 5);
 
