@@ -67,13 +67,4 @@ class AuthApi {
       throw Exception('Failed to logout: ${response.body}');
     }
   }
-
-  String _getUserIdFromJwt(String jwt) {
-    try {
-      final decoded = JwtDecoder.decode(jwt);
-      return decoded['sub'] ?? decoded['userId']; // Поменять в зависимости от того, как бекенд хранит ID в токене
-    } catch (e) {
-      throw Exception('Failed to decode JWT: $e');
-    }
-  }
 }
