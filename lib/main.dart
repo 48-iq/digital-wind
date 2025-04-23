@@ -4,10 +4,19 @@ import 'package:provider/provider.dart';
 import 'features/auth/data/store/auth_store.dart';
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/auth/presentation/pages/register_page.dart';
+import 'features/endings/data/store/endings_store.dart';
 import 'features/main_menu/presentation/pages/main_menu_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthStore()),
+        ChangeNotifierProvider(create: (_) => EndingsStore()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,8 +24,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   /* List<String> test = ["концовка слона", 'концовка бурильщика'];
-    return Center( child:  AllEndingsPage(endings:  test));*/
     return ChangeNotifierProvider(
       create: (context) => AuthStore(),
       child: MaterialApp(
@@ -57,6 +64,29 @@ class _AuthWrapperState extends State<AuthWrapper> {
         onPlayPressed: () {
 
         },
+        // onEndingsPressed: () async {
+        //   try {
+        //     final endingsStore = Provider.of<EndingsStore>(context, listen: false);
+        //     await endingsStore.loadEndings(authStore.token!);
+        //
+        //     if (mounted) {
+        //       Navigator.of(context).push(
+        //         MaterialPageRoute(
+        //           builder: (_) => AllEndingsPage(
+        //             endings: endingsStore.endings,
+        //             onExitPressed: () => Navigator.of(context).pop(),
+        //           ),
+        //         ),
+        //       );
+        //     }
+        //   } catch (e) {
+        //     if (mounted) {
+        //       ScaffoldMessenger.of(context).showSnackBar(
+        //         SnackBar(content: Text('Ошибка загрузки концовок: ${e.toString()}')),
+        //       );
+        //     }
+        //   }
+        // },
         onEndingsPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
