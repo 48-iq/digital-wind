@@ -24,12 +24,6 @@ class AuthApi {
       final token = responseData['token'];
       final userData = responseData['user'];
 
-      // Проверка, что ID в JWT = ID в user объекте
-      final jwtUserId = _getUserIdFromJwt(token);
-      if (jwtUserId != userData['id']) {
-        throw Exception('User ID in JWT does not match user object');
-      }
-
       return AuthResponse(
         token: token,
         user: User.fromJson(userData),
@@ -50,12 +44,6 @@ class AuthApi {
       final responseData = json.decode(response.body);
       final token = responseData['token'];
       final userData = responseData['user'];
-
-      // Проверка, что ID в JWT = ID в user объекте
-      final jwtUserId = _getUserIdFromJwt(token);
-      if (jwtUserId != userData['id']) {
-        throw Exception('User ID in JWT does not match user object');
-      }
 
       return AuthResponse(
         token: token,
