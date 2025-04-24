@@ -6,7 +6,6 @@ import 'features/auth/presentation/pages/login_page.dart';
 import 'features/auth/presentation/pages/register_page.dart';
 import 'features/endings/data/store/endings_store.dart';
 import 'features/main_menu/presentation/pages/main_menu_page.dart';
-import 'features/quest/presentation/pages/quest_page.dart';
 
 void main() {
   runApp(
@@ -63,9 +62,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
     if (authStore.isAuthenticated) {
       return MainMenuPage(
         onPlayPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const QuestPage()),
-          );
         },
         // onEndingsPressed: () async {
         //   try {
@@ -101,12 +97,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
           );
         },
         onLogoutPressed: () async {
-          await authStore.logout();
-          if (mounted) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) => const AuthWrapper()),
-            );
-          }
+         
         },
       );
     }

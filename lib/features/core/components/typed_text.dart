@@ -50,3 +50,5 @@ class _TypedTextState extends State<TypedText> {
     );
   }
 }
+
+//fixed

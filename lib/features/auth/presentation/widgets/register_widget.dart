@@ -1,3 +1,4 @@
+import 'package:digital_wind/features/auth/data/entities/register_request.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/components/typed_text.dart';
@@ -91,9 +92,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     });
 
     await Provider.of<AuthStore>(context, listen: false).register(
-      _usernameController.text,
-      _emailController.text,
-      _passwordController.text,
+      RegisterRequest(
+        username: _usernameController.text,
+        email: _emailController.text,
+        password: _passwordController.text
+      )
     );
 
     setState(() {

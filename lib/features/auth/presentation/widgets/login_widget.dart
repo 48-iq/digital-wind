@@ -1,3 +1,6 @@
+import 'package:digital_wind/features/auth/data/entities/login_response.dart';
+import 'package:digital_wind/features/core/components/player_message_header.dart';
+import 'package:digital_wind/features/core/components/system_message_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/components/typed_text.dart';
@@ -13,52 +16,45 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+
+  // text inputs
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  // messages
   final List<Map<String, dynamic>> _messages = [];
   bool _showUsernameField = false;
   bool _showPasswordField = false;
-  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _addSystemMessage('Введите имя пользователя:');
+    _addMessage('Введите имя пользователя:');
     _showUsernameField = true;
   }
 
-  void _addSystemMessage(String text) {
-    _messages.add({
-      'text': text,
-      'isSystem': true,
-      'isTyping': true,
+  void _addMessage(String text, {bool isSystem = true}) {
+    setState(() {  
+      _messages.add({
+        'text': text,
+        'isSystem': isSystem,
+        'isTyping': true,
+      });
     });
-    setState(() {});
-  }
-
-  void _addUserMessage(String text) {
-    _messages.add({
-      'text': text,
-      'isSystem': false,
-      'isTyping': false,
-    });
-    setState(() {});
   }
 
   void _completeTyping(int index) {
     _messages[index]['isTyping'] = false;
-    setState(() {});
   }
 
   void _onUsernameSubmitted(String value) async {
     if (value.isEmpty) return;
 
-    _addUserMessage(value);
+    _addMessage(value, isSystem: false);
     _showUsernameField = false;
 
     await Future.delayed(const Duration(milliseconds: 300));
-    _addSystemMessage('Введите пароль:');
+    _addMessage('Введите пароль:');
     _showPasswordField = true;
   }
 
@@ -67,21 +63,11 @@ class _LoginWidgetState extends State<LoginWidget> {
       return;
     }
 
-    _addUserMessage(List.filled(_passwordController.text.length, '*').join());
+    _addMessage(List.filled(_passwordController.text.length, '*').join(), isSystem: false);
     _showPasswordField = false;
 
-    setState(() {
-      _isLoading = true;
-    });
-
     await Provider.of<AuthStore>(context, listen: false).login(
-      _usernameController.text,
-      _passwordController.text,
-    );
-
-    setState(() {
-      _isLoading = false;
-    });
+      LoginRequest(username: _usernameController.text, password: _passwordController.text));
   }
 
   @override
@@ -104,65 +90,25 @@ class _LoginWidgetState extends State<LoginWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (message['isSystem'])
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                              text: '[',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                          TextSpan(
-                            text: 'система',
-                            style: const TextStyle(
-                                color: Colors.blue),
-                          ),
-                          const TextSpan(
-                              text: ']',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                        ],
-                      ),
-                    ),
+                    const SystemMessageHeader(),
 
                   if (!message['isTyping'] && !message['isSystem'])
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                              text: '[',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                          TextSpan(
-                            text: 'игрок',
-                            style: const TextStyle(
-                                color: Color(0xFFB91354)),
-                          ),
-                          const TextSpan(
-                              text: ']',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                        ],
-                      ),
-                    ),
+                    const PlayerMessageHeader(),
 
                   if (message['isTyping'])
                     TypedText(
                       text: message['text'],
                       style: TextStyle(
-                        color: message['isSystem'] ? Colors.white : Colors
-                            .white,
+                        color: Colors.white,
                         fontFamily: 'Courier',
                       ),
                       onCompleted: () => _completeTyping(index),
                     )
                   else
                     Text(
-                      message['isSystem']
-                          ? message['text']
-                          : '> ${message['text']}',
+                      message['isSystem'] ? message['text']: '> ${message['text']}',
                       style: TextStyle(
-                        color: message['isSystem'] ? Colors.white : Colors
-                            .white,
+                        color: Colors.white,
                         fontFamily: 'Courier',
                       ),
                     ),
@@ -217,30 +163,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
               ),
             ],
-          ),
-
-        if (_isLoading)
-          const TypedText(
-            text: '[система]\nloading \\',
-            style: TextStyle(color: Colors.white),
-          ),
-
-        if (!_isLoading)
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: OutlinedButton(
-                onPressed: widget.onRegisterPressed,
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Color(0xFFB91354)),
-                ),
-                child: const Text(
-                  'Перейти к регистрации',
-                  style: TextStyle(color: Color(0xFFB91354)),
-                ),
-              ),
-            ),
           ),
       ],
     );

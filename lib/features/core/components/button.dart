@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
@@ -7,11 +6,11 @@ class Button extends StatelessWidget {
   final VoidCallback onPressed;
 
   const Button({
-    Key? key,
+    super.key,
     required this.text,
     required this.borderColor,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,3 +41,5 @@ class Button extends StatelessWidget {
     );
   }
 }
+
+//fixed
