@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppHeaderGear extends StatelessWidget {
-  const AppHeaderGear({super.key});
+  final VoidCallback? onTap;
+
+  const AppHeaderGear({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +25,13 @@ class AppHeaderGear extends StatelessWidget {
               width: 230,
               fit: BoxFit.contain,
             ),
-            Image.asset(
-              'assets/images/logo_settings.png',
-              width: 42,
-              fit: BoxFit.contain,
+            GestureDetector(
+              onTap: onTap,
+              child: Image.asset(
+                'assets/images/logo_settings.png',
+                width: 42,
+                fit: BoxFit.contain,
+              ),
             ),
           ],
         ),
