@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../core/components/button.dart';
-import '../../../core/widgets/app_header.dart';
 
 class EndingsWidget extends StatelessWidget{
   final VoidCallback onExitPressed;

@@ -1,0 +1,45 @@
+{
+  "sysActions": [
+    {
+      "id": "start",
+      "text": "Приветствую",
+      "type": "system",
+      "playerActionIds": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "final",
+      "text": "Концовка!",
+      "type": "ending",
+      "playerActionIds": null
+    }
+  ],
+  "playerActions": [
+    {
+      "id": "1",
+      "text": "Привет",
+      "sysActions": [
+        {
+          "id": "start",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "text": "Пока",
+      "sysActions": [
+        {
+          "id": "final",
+          "condition": [["start"], ["*"]]
+        },
+        {
+          "id": "final",
+          "condition": null
+        }
+      ]
+    }
+  ]
+}
