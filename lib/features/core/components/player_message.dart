@@ -1,13 +1,14 @@
+
 import 'package:digital_wind/features/core/components/system_message_header.dart';
 import 'package:digital_wind/features/core/components/typed_text.dart';
 import 'package:flutter/material.dart';
 
-class SystemMessage extends StatefulWidget {
+class PlayerMessage extends StatefulWidget {
   final String text;
   final bool isTyping;
   final VoidCallback? onCompleted;
 
-  const SystemMessage({
+  const PlayerMessage({
     super.key,
     required this.text,
     required this.isTyping,
@@ -15,10 +16,10 @@ class SystemMessage extends StatefulWidget {
   });
 
   @override
-  State<SystemMessage> createState() => _SystemMessageState();
+  State<PlayerMessage> createState() => _SystemMessageState();
 }
 
-class _SystemMessageState extends State<SystemMessage> {
+class _SystemMessageState extends State<PlayerMessage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +40,7 @@ class _SystemMessageState extends State<SystemMessage> {
             )
           else
             Text(
-              widget.text,
+              '> ${widget.text}',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Courier',

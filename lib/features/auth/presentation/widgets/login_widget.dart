@@ -1,9 +1,9 @@
 import 'package:digital_wind/features/auth/data/entities/login_response.dart';
-import 'package:digital_wind/features/core/components/player_message_header.dart';
-import 'package:digital_wind/features/core/components/system_message_header.dart';
+import 'package:digital_wind/features/auth/presentation/components/text_input.dart';
+import 'package:digital_wind/features/core/components/player_message.dart';
+import 'package:digital_wind/features/core/components/system_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/components/typed_text.dart';
 import '../../data/store/auth_store.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -12,19 +12,21 @@ class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key, required this.onRegisterPressed});
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  State<LoginWidget> createState() => _LoginWidgetState();
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
 
-  // text inputs
+  // username text input
   final _usernameController = TextEditingController();
+  bool _showUsernameField = false;
+
+  //password text input
   final _passwordController = TextEditingController();
+  bool _showPasswordField = false;
 
   // messages
   final List<Map<String, dynamic>> _messages = [];
-  bool _showUsernameField = false;
-  bool _showPasswordField = false;
 
   @override
   void initState() {
@@ -43,19 +45,16 @@ class _LoginWidgetState extends State<LoginWidget> {
     });
   }
 
-  void _completeTyping(int index) {
-    _messages[index]['isTyping'] = false;
-  }
-
   void _onUsernameSubmitted(String value) async {
     if (value.isEmpty) return;
-
+    await Future.delayed(const Duration(milliseconds: 300));
     _addMessage(value, isSystem: false);
     _showUsernameField = false;
 
-    await Future.delayed(const Duration(milliseconds: 300));
     _addMessage('Введите пароль:');
     _showPasswordField = true;
+    print("aaa");
+    setState(() {});
   }
 
   Future<void> _handleLogin() async {
@@ -68,6 +67,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     await Provider.of<AuthStore>(context, listen: false).login(
       LoginRequest(username: _usernameController.text, password: _passwordController.text));
+    
+    setState(() {});
   }
 
   @override
@@ -90,28 +91,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (message['isSystem'])
-                    const SystemMessageHeader(),
-
-                  if (!message['isTyping'] && !message['isSystem'])
-                    const PlayerMessageHeader(),
-
-                  if (message['isTyping'])
-                    TypedText(
-                      text: message['text'],
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Courier',
-                      ),
-                      onCompleted: () => _completeTyping(index),
+                    SystemMessage(
+                      text: message['text'], 
+                      isTyping: message['isTyping'], 
+                      onCompleted: () => _messages[index]['isTyping'] = false
                     )
-                  else
-                    Text(
-                      message['isSystem'] ? message['text']: '> ${message['text']}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Courier',
-                      ),
-                    ),
+                  else 
+                    PlayerMessage(
+                      text: message['text'], 
+                      isTyping: message['isTyping'], 
+                      onCompleted: () => _messages[index]['isTyping'] = false
+                    )
                 ],
               ),
             );
@@ -119,50 +109,17 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
 
         if (_showUsernameField)
-          Row(
-            children: [
-              const Text(
-                '> ',
-                style: TextStyle(color: Colors.white, fontFamily: 'Courier'),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: _usernameController,
-                  autofocus: true,
-                  style: const TextStyle(
-                      color: Colors.white, fontFamily: 'Courier'),
-                  decoration: const InputDecoration(
-                    hintText: '',
-                    border: InputBorder.none,
-                  ),
-                  onSubmitted: _onUsernameSubmitted,
-                ),
-              ),
-            ],
+          TextInput(
+            obscureText: false,
+            controller: _usernameController,
+            handleEnter: () => _onUsernameSubmitted,
           ),
 
         if (_showPasswordField)
-          Row(
-            children: [
-              const Text(
-                '> ',
-                style: TextStyle(color: Colors.white, fontFamily: 'Courier'),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  autofocus: true,
-                  style: const TextStyle(
-                      color: Colors.white, fontFamily: 'Courier'),
-                  decoration: const InputDecoration(
-                    hintText: '', // Убираем hintText
-                    border: InputBorder.none,
-                  ),
-                  onSubmitted: (_) => _handleLogin(),
-                ),
-              ),
-            ],
+          TextInput(
+            obscureText: true,
+            controller: _passwordController,
+            handleEnter: _handleLogin,
           ),
       ],
     );
