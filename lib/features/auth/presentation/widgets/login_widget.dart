@@ -35,12 +35,23 @@ class _LoginWidgetState extends State<LoginWidget> {
     _showUsernameField = true;
   }
 
-  void _addMessage(String text, {bool isSystem = true}) {
+  void _addMessage(String text, {bool isSystem = true, Function()? onCompleted}) {
+    String id = '${DateTime.now().millisecondsSinceEpoch}${_messages.length}';
     setState(() {  
       _messages.add({
+        'id': id,
         'text': text,
         'isSystem': isSystem,
         'isTyping': true,
+        'onCompleted': () {
+          onCompleted?.call();
+          for (var i = 0; i < _messages.length; i++) {
+            if (_messages[i]['id'] == id) {
+              _messages[i]['isTyping'] = false;
+            }
+          }
+          setState(() {});
+        }
       });
     });
   }
@@ -48,16 +59,15 @@ class _LoginWidgetState extends State<LoginWidget> {
   void _onUsernameSubmitted(String value) async {
     if (value.isEmpty) return;
     await Future.delayed(const Duration(milliseconds: 300));
-    _addMessage(value, isSystem: false);
     _showUsernameField = false;
-
-    _addMessage('Введите пароль:');
-    _showPasswordField = true;
-    print("aaa");
-    setState(() {});
+    _addMessage(value, isSystem: false, onCompleted: () async {
+      await Future.delayed(const Duration(milliseconds: 300));
+      _addMessage('Введите пароль:');
+      _showPasswordField = true;
+    });
   }
 
-  Future<void> _handleLogin() async {
+  Future<void> _handleLogin(String value) async {
     if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
       return;
     }
@@ -67,8 +77,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     await Provider.of<AuthStore>(context, listen: false).login(
       LoginRequest(username: _usernameController.text, password: _passwordController.text));
-    
-    setState(() {});
+
   }
 
   @override
@@ -94,13 +103,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                     SystemMessage(
                       text: message['text'], 
                       isTyping: message['isTyping'], 
-                      onCompleted: () => _messages[index]['isTyping'] = false
+                      onCompleted: () => (message['onCompleted'] as Function?)?.call()
                     )
                   else 
                     PlayerMessage(
                       text: message['text'], 
                       isTyping: message['isTyping'], 
-                      onCompleted: () => _messages[index]['isTyping'] = false
+                      onCompleted: () => (message['onCompleted'] as Function?)?.call()
                     )
                 ],
               ),
@@ -112,7 +121,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           TextInput(
             obscureText: false,
             controller: _usernameController,
-            handleEnter: () => _onUsernameSubmitted,
+            handleEnter: _onUsernameSubmitted,
           ),
 
         if (_showPasswordField)

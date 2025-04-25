@@ -1,4 +1,5 @@
 
+import 'package:digital_wind/features/core/components/player_message_header.dart';
 import 'package:digital_wind/features/core/components/system_message_header.dart';
 import 'package:digital_wind/features/core/components/typed_text.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +28,11 @@ class _SystemMessageState extends State<PlayerMessage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            const SystemMessageHeader(),
+            const PlayerMessageHeader(),
 
           if (widget.isTyping)
             TypedText(
-              text: widget.text,
+              text:'> ${widget.text}',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Courier',

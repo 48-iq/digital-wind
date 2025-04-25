@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextInput extends StatefulWidget {
-  final VoidCallback? handleEnter;
+  final Function(String)? handleEnter;
   final TextEditingController? controller;
   final bool? obscureText;
   const TextInput({
@@ -35,7 +35,7 @@ class _TextInputState extends State<TextInput> {
               hintText: '', // Убираем hintText
               border: InputBorder.none,
             ),
-            onSubmitted: (_) => widget.handleEnter,
+            onSubmitted: widget.handleEnter,
           ),
         ),
       ],
