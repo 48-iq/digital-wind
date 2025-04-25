@@ -1,6 +1,11 @@
+import 'package:digital_wind/features/auth/data/entities/login_response.dart';
+import 'package:digital_wind/features/auth/presentation/components/auth_button.dart';
+import 'package:digital_wind/features/auth/presentation/components/text_input.dart';
+import 'package:digital_wind/features/core/components/player_message.dart';
+import 'package:digital_wind/features/core/components/system_message.dart';
+import 'package:digital_wind/features/menu/presentation/pages/main_menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/components/typed_text.dart';
 import '../../data/store/auth_store.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -9,79 +14,78 @@ class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key, required this.onRegisterPressed});
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  State<LoginWidget> createState() => _LoginWidgetState();
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
 
-  final List<Map<String, dynamic>> _messages = [];
+  // username text input
+  final _usernameController = TextEditingController();
   bool _showUsernameField = false;
+
+  //password text input
+  final _passwordController = TextEditingController();
   bool _showPasswordField = false;
-  bool _isLoading = false;
+
+  // messages
+  final List<Map<String, dynamic>> _messages = [];
 
   @override
   void initState() {
     super.initState();
-    _addSystemMessage('Введите имя пользователя:');
+    _addMessage('Введите имя пользователя:');
     _showUsernameField = true;
   }
 
-  void _addSystemMessage(String text) {
-    _messages.add({
-      'text': text,
-      'isSystem': true,
-      'isTyping': true,
+  void _addMessage(String text, {bool isSystem = true, Function()? onCompleted}) {
+    String id = '${DateTime.now().millisecondsSinceEpoch}${_messages.length}';
+    setState(() {  
+      _messages.add({
+        'id': id,
+        'text': text,
+        'isSystem': isSystem,
+        'isTyping': true,
+        'onCompleted': () {
+          onCompleted?.call();
+          for (var i = 0; i < _messages.length; i++) {
+            if (_messages[i]['id'] == id) {
+              _messages[i]['isTyping'] = false;
+            }
+          }
+          setState(() {});
+        }
+      });
     });
-    setState(() {});
-  }
-
-  void _addUserMessage(String text) {
-    _messages.add({
-      'text': text,
-      'isSystem': false,
-      'isTyping': false,
-    });
-    setState(() {});
-  }
-
-  void _completeTyping(int index) {
-    _messages[index]['isTyping'] = false;
-    setState(() {});
   }
 
   void _onUsernameSubmitted(String value) async {
     if (value.isEmpty) return;
-
-    _addUserMessage(value);
-    _showUsernameField = false;
-
     await Future.delayed(const Duration(milliseconds: 300));
-    _addSystemMessage('Введите пароль:');
-    _showPasswordField = true;
+    _showUsernameField = false;
+    _addMessage(value, isSystem: false, onCompleted: () async {
+      await Future.delayed(const Duration(milliseconds: 300));
+      _showPasswordField = true;
+      _addMessage('Введите пароль:');
+    });
   }
 
-  Future<void> _handleLogin() async {
+  Future<void> _handleLogin(String value) async {
     if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
       return;
     }
 
-    _addUserMessage(List.filled(_passwordController.text.length, '*').join());
     _showPasswordField = false;
-
-    setState(() {
-      _isLoading = true;
-    });
+    _addMessage(List.filled(_passwordController.text.length, '*').join(), isSystem: false);
 
     await Provider.of<AuthStore>(context, listen: false).login(
-      _usernameController.text,
-      _passwordController.text,
+      LoginRequest(username: _usernameController.text, password: _passwordController.text));
+    if (Provider.of(context, listen: true).isAuthenticated) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      Navigator.pop(context);
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) => const MainMenuPage())
     );
-
-    setState(() {
-      _isLoading = false;
-    });
+    }
   }
 
   @override
@@ -104,68 +108,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (message['isSystem'])
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                              text: '[',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                          TextSpan(
-                            text: 'система',
-                            style: const TextStyle(
-                                color: Colors.blue),
-                          ),
-                          const TextSpan(
-                              text: ']',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  if (!message['isTyping'] && !message['isSystem'])
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                              text: '[',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                          TextSpan(
-                            text: 'игрок',
-                            style: const TextStyle(
-                                color: Color(0xFFB91354)),
-                          ),
-                          const TextSpan(
-                              text: ']',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  if (message['isTyping'])
-                    TypedText(
-                      text: message['text'],
-                      style: TextStyle(
-                        color: message['isSystem'] ? Colors.white : Colors
-                            .white,
-                        fontFamily: 'Courier',
-                      ),
-                      onCompleted: () => _completeTyping(index),
+                    SystemMessage(
+                      text: message['text'], 
+                      isTyping: message['isTyping'], 
+                      onCompleted: () => (message['onCompleted'] as Function?)?.call()
                     )
-                  else
-                    Text(
-                      message['isSystem']
-                          ? message['text']
-                          : '> ${message['text']}',
-                      style: TextStyle(
-                        color: message['isSystem'] ? Colors.white : Colors
-                            .white,
-                        fontFamily: 'Courier',
-                      ),
-                    ),
+                  else 
+                    PlayerMessage(
+                      text: message['text'], 
+                      isTyping: message['isTyping'], 
+                      onCompleted: () => (message['onCompleted'] as Function?)?.call()
+                    )
                 ],
               ),
             );
@@ -173,75 +126,28 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
 
         if (_showUsernameField)
-          Row(
-            children: [
-              const Text(
-                '> ',
-                style: TextStyle(color: Colors.white, fontFamily: 'Courier'),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: _usernameController,
-                  autofocus: true,
-                  style: const TextStyle(
-                      color: Colors.white, fontFamily: 'Courier'),
-                  decoration: const InputDecoration(
-                    hintText: '',
-                    border: InputBorder.none,
-                  ),
-                  onSubmitted: _onUsernameSubmitted,
-                ),
-              ),
-            ],
+          TextInput(
+            obscureText: false,
+            controller: _usernameController,
+            handleEnter: _onUsernameSubmitted,
           ),
 
         if (_showPasswordField)
-          Row(
-            children: [
-              const Text(
-                '> ',
-                style: TextStyle(color: Colors.white, fontFamily: 'Courier'),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  autofocus: true,
-                  style: const TextStyle(
-                      color: Colors.white, fontFamily: 'Courier'),
-                  decoration: const InputDecoration(
-                    hintText: '', // Убираем hintText
-                    border: InputBorder.none,
-                  ),
-                  onSubmitted: (_) => _handleLogin(),
-                ),
-              ),
-            ],
+          TextInput(
+            obscureText: true,
+            controller: _passwordController,
+            handleEnter: _handleLogin,
           ),
-
-        if (_isLoading)
-          const TypedText(
-            text: '[система]\nloading \\',
-            style: TextStyle(color: Colors.white),
-          ),
-
-        if (!_isLoading)
-          Align(
+        Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(top: 20.0),
-              child: OutlinedButton(
+              child: AuthButton(
+                text: 'Нет аккаунта? Зарегистрироватся',
                 onPressed: widget.onRegisterPressed,
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Color(0xFFB91354)),
-                ),
-                child: const Text(
-                  'Перейти к регистрации',
-                  style: TextStyle(color: Color(0xFFB91354)),
-                ),
               ),
-            ),
-          ),
+          )
+        )
       ],
     );
   }

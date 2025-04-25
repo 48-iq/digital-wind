@@ -15,3 +15,5 @@ class RegisterRequest {
     'email': email,
   };
 }
+
+// fixed

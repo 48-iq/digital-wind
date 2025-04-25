@@ -3,15 +3,9 @@ import '../../../core/widgets/app_header.dart';
 import '../widgets/main_menu_widget.dart';
 
 class MainMenuPage extends StatelessWidget {
-  final VoidCallback onPlayPressed;
-  final VoidCallback onEndingsPressed;
-  final VoidCallback onLogoutPressed;
 
   const MainMenuPage({
-    super.key,
-    required this.onPlayPressed,
-    required this.onEndingsPressed,
-    required this.onLogoutPressed,
+    super.key
   });
 
   @override
@@ -25,11 +19,7 @@ class MainMenuPage extends StatelessWidget {
             const AppHeader(),
             Padding(
               padding: const EdgeInsets.only(top: 40),
-              child: MainMenuWidget(
-                onPlayPressed: onPlayPressed,
-                onEndingsPressed: onEndingsPressed,
-                onLogoutPressed: onLogoutPressed,
-              ),
+              child: MainMenuWidget(),
             ),
           ],
         ),

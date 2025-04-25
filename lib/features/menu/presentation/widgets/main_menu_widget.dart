@@ -4,15 +4,12 @@ import '../../../core/widgets/app_header.dart';
 import '../../../core/widgets/app_header_gear.dart';
 
 class MainMenuWidget extends StatelessWidget {
-  final VoidCallback onPlayPressed;
-  final VoidCallback onEndingsPressed;
-  final VoidCallback onLogoutPressed;
+  void onPlayPressed() {}
+  void onEndingsPressed() {}
+  void onLogoutPressed() {}
 
   const MainMenuWidget({
-    super.key,
-    required this.onPlayPressed,
-    required this.onEndingsPressed,
-    required this.onLogoutPressed,
+    super.key
   });
 
   @override

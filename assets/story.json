@@ -2,25 +2,849 @@
   "sysActions": [
     {
       "id": "start",
-      "text": "Приветствую",
+      "text": "Ты сидишь в большой комнате, рядом с тобой большое количество людей, все они уставились на тебя. Один из них не просто смотрит, а сверлит тебя испепеляющим взглядом.",
       "type": "system",
       "playerActionIds": [
-        "1",
-        "2"
+        "what-happen-1",
+        "who-you-2",
+        "drill-back-3"
       ]
     },
     {
-      "id": "final",
-      "text": "Концовка!",
+      "id": "horse-coat-4",
+      "text": "Конь в пальто!",
+      "type": "system",
+      "playerActionIds": [
+        "you-teacher-6"
+      ]
+    },
+    {
+      "id": "drill-more-5",
+      "text": "Вы сверлите друг друга все сильнее.",
+      "type": "system",
+      "playerActionIds": [
+        "look-away-7", 
+        "continue-drill-8"
+      ]
+    },
+    {
+      "id": "joke-survive-9",
+      "text": "Мы как раз начали новую тему: 'Как выжить на паре после сна'. Ты будешь нашим главным примером.",
+      "type": "system",
+      "playerActionIds": [
+        "sorry-12"
+      ]
+    },
+    {
+      "id": "why-sleep-10",
+      "text": "Почему спим во время занятия!?",
+      "type": "system",
+      "playerActionIds": [
+        "sorry-12"
+      ]
+    },
+    {
+      "id": "eyes-hurt-11",
+      "text": "Вашим глазам уже становится больно.",
+      "type": "system",
+      "playerActionIds": [
+        "look-drill-man-13",
+        "not-step-back-14",
+        "king-hit-15"
+      ]
+    },
+    {
+      "id": "hackathon-16",
+      "text": "...Ребята, хочу вас порадовать, ведь в скором времени пройдет хакатон по мобильной разработке - Цифровой ветер. Каждый желающий может принять участие!",
+      "type": "system",
+      "playerActionIds": [
+        "paris-18",
+        "what-wind-19",
+        "continue-sleep-20"
+      ]
+    },
+    {
+      "id": "hackathon-16",
+      "text": "Ваша битва была легендарной, но, к сожалению, вы проиграли и вас выгнали из аудитории!",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "participation-mandatory-21",
+      "text": "Одна из номинаций как раз касается нашего предмета, тема этой номинации - геймифицированный квест Неофлекс... УЧАСТИЕ ВСЕХ ОБЯЗАТЕЛЪНО!!! На этом пара закончена.",
+      "type": "system",
+      "playerActionIds": [
+        "home-23"
+      ]
+    },
+    {
+      "id": "sad-life-22",
+      "text": "Вы заснули, ваша жизнь была унылой и скучной, без романтики и приключений.",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "fell-asleep-24",
+      "text": "Неофлекс... Неофлекс... но ты про него мало что знаешь, просидев пол вечера за компом в попытках узнать историю этой компании, ты уснул от переутомления.",
+      "type": "system",
+      "playerActionIds": [
+        "dream-study-25",
+        "dream-elephant-26",
+        "dream-neoflex-27"
+      ]
+    },
+    {
+      "id": "dream-recursion-28",
+      "text": "Ты во сне, во сне, во сне, ... Даже Ди Каприо в шоке! Держи концовку за упорство",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "town-man-stool-29",
+      "text": "Город, пекло, по асфальту перекатывается перекати поле, ты стоишь возле двери в какое-то здание, к тебе подходит странно одетый мужчина с табуреткой и слоном на привязи, просит купить животное",
+      "type": "system",
+      "playerActionIds": [
+        "not-buy-30",
+        "buy-31",
+        "in-door-32"
+      ]
+    },
+    {
+      "id": "buy-elephant-33",
+      "text": "Все так говорят, а ты купи слона",
+      "type": "system",
+      "playerActionIds": [
+        "not-buy-30",
+        "buy-31",
+        "in-door-32"
+      ]
+    },
+    {
+      "id": "investigation-koloboks-34",
+      "text": "Как только, ты покупаешь животное, из-за угла резко выбегают 2 человека и надевают на вас наручники. 'Шеф, а я слона вижу;, говорит один из задержавших вас 'Аналогично', отвечает второй человек. 'Ничего не понимаю.', успеваете сказать вы, прежде чем вас увезут в отделение.",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "office-35",
+      "text": "Ты попадаешь в современный, красивый офис и осматриваешься. Впереди - длинный коридор, позади дверь с надписью 'Выход'.",
+      "type": "system",
+      "playerActionIds": [
+        "leave-office-36",
+        "forward-37",
+        "stand-38"
+      ]
+    },
+    {
+      "id": "met-employee-39",
+      "text": "Проходя по светлому коридору, ты встретил сотрудника. 'Я вас раньше здесь не видел, вы новенький?'",
+      "type": "system",
+      "playerActionIds": [
+        "job-yesterday-41",
+        "dad-lunch-42",
+        "got-lost-43"
+      ]
+    },
+    {
+      "id": "nothing-happen-40",
+      "text": "Ты стоишь на месте. Ничего не происходит. Удивительно, не правда ли?",
+      "type": "system",
+      "playerActionIds": [
+        "forward-37",
+        "stand-38"
+      ]
+    },
+    {
+      "id": "HR-dialog-44",
+      "text": "Хм, подозрительно, я работаю HR-ом и не помню, а вас ознакомили с историей компании?",
+      "type": "system",
+      "playerActionIds": [
+        "no-47",
+        "sure-yes-48",
+        "uncertain-yes-49"
+      ]
+    },
+    {
+      "id": "to-dad-45",
+      "text": "Давай я тебя к нему провожу, кем он работает",
+      "type": "system",
+      "playerActionIds": [
+        "dev-bank-po-50",
+        "cleaning-51",
+        "space-ship-52"
+      ]
+    },
+    {
+      "id": "choose-direction-46",
+      "text": "А куда вам нужно?",
+      "type": "system",
+      "playerActionIds": [
+        "to-Rio-53",
+        "to-dev-54",
+        "to-server-55"
+      ]
+    },
+    {
+      "id": "choose-direction-46",
+      "text": "А куда вам нужно?",
+      "type": "system",
+      "playerActionIds": [
+        "to-Rio-53",
+        "to-dev-54",
+        "to-server-55"
+      ]
+    },
+    {
+      "id": "creation-Neoflex-56",
+      "text": "В каком году был создан Neoflex?",
+      "type": "system",
+      "playerActionIds": [
+        "ans-2010-64",
+        "ans-2005-65",
+        "ans-988-66"
+      ]
+    },
+    {
+      "id": "lets-go-57",
+      "text": "Ну пошли",
+      "type": "system",
+      "playerActionIds": [
+        "smile-67"
+      ]
+    },
+    {
+      "id": "fun-lets-go-58",
+      "text": "Хехехе - интересно, ну пошли",
+      "type": "system",
+      "playerActionIds": [
+        "smile-76"
+      ]
+    },
+    {
+      "id": "space-adventure-59",
+      "text": "'Крутяк, познакомишь меня с ним'. Вдруг открывается портал на космодром и вы зашли в него. Вы отправились познавать секреты космоса, искать ответ на вопрос жизни, смерти и вообще всего, но это уже совсем другая история...",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "stranger-61",
+      "text": "Вдруг из темного угла выходит человек 'Я могу провести тебя короткой дорогой'. Ты видишь зеленоволосого мужчину в кимоно. 'Следуй за мной'",
+      "type": "system",
+      "playerActionIds": [
+        "go-after-him-69"
+      ]
+    },
+    {
+      "id": "why-62",
+      "text": "Зачем?",
+      "type": "system",
+      "playerActionIds": [
+        "dinner-60",
+        "internship-70"
+      ]
+    },
+    {
+      "id": "suspicion-63",
+      "text": "Он посмотрел на вас с подозрением, 'Туда посторонним вход запрещен. Зачем тебе туда надо?' ",
+      "type": "system",
+      "playerActionIds": [
+        "turn-off-71"
+      ]
+    },
+    {
+      "id": "wrong-72",
+      "text": "Что? Нет, это неверный ответ.",
+      "type": "system",
+      "playerActionIds": [
+        "blin-80"
+      ]
+    },
+    {
+      "id": "correct-73",
+      "text": "Верно)",
+      "type": "system",
+      "playerActionIds": [
+        "smile-81"
+      ]
+    },
+    {
+      "id": "joke-74",
+      "text": "Ага, после крещения Руси. Ладно, за неплохую шутку дам шанс",
+      "type": "system",
+      "playerActionIds": [
+        "luck-82"
+      ]
+    },
+    {
+      "id": "dad-work-75",
+      "text": "А твой папа тебе рассказывал о работе",
+      "type": "system",
+      "playerActionIds": [
+        "of-course-83",
+        "of-course-84",
+        "of-course-85"
+      ]
+    },
+    {
+      "id": "adventure-77",
+      "text": "В пути тебя ожидало невероятное путешествие с кучей опасностей, друзей, врагов и гулянок. Только вот ты некогда не попадешь в Рио-де-Жанейро",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "internship-city-78",
+      "text": "Отлично, в каком городе ты хочешь проходить стажировку?",
+      "type": "system",
+      "playerActionIds": [
+        "city-86",
+        "city-87",
+        "city-88"
+      ]
+    },
+    {
+      "id": "strange-end-79",
+      "text": "После этих слов, сотрудник заблокировал собой проход и громко закричал 'ОХРАНА!!!'. Тебя схватили и выбросили на улицу, оставив тебя в размышлении об этой выходке. 'Я ведь даже кулеров не слышал'",
+      "type": "system",
+      "playerActionIds": null
+    },
+    {
+      "id": "to-project-89",
+      "text": "Ладно сейчас я тебя направлю на один из наших проектов. Чем ты вообще хочешь заниматься?",
+      "type": "system",
+      "playerActionIds": [
+        "laziness-93",
+        "develop-94",
+        "write-cod-95"
+      ]
+    },
+    {
+      "id": "dad-department-90",
+      "text": "А в каком отделе он работает?",
+      "type": "system",
+      "playerActionIds": [
+        "department-96",
+        "department-97",
+        "department-98"
+      ]
+    },
+    {
+      "id": "wrong-city-91",
+      "text": "Там не получится). Ты вообще знаешь где находятся наши филиалы?",
+      "type": "system",
+      "playerActionIds": [
+        "wrong-cities-99",
+        "wrong-cities-100",
+        "correct-cities-101"
+      ]
+    },
+    {
+      "id": "correct-city-92",
+      "text": "Прекрасно, а ты знаешь ещё города, где у нас  есть филиалы?",
+      "type": "system",
+      "playerActionIds": [
+        "wrong-cities-99",
+        "wrong-cities-100",
+        "correct-cities-101"
+      ]
+    },
+    {
+      "id": "laziness-end-102",
+      "text": "'Нам ленивые сотрудники не нужны. Вы уволены.' Вот так ты не успел отработать даже один день.",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "good-guy-103",
+      "text": "Отлично, нам нужны умные и инициативные ребята. пойдем за мной!",
+      "type": "system",
+      "playerActionIds": [
+        "forward-107"
+      ]
+    },
+    {
+      "id": "almost-104",
+      "text": "Почти, но в некоторых нас пока их нет",
+      "type": "system",
+      "playerActionIds": [
+        "ok-108"
+      ]
+    },
+    {
+      "id": "almost-105",
+      "text": "Эх, если бы...)",
+      "type": "system",
+      "playerActionIds": [
+        "ok-108"
+      ]
+    },
+    {
+      "id": "correct-cities-106",
+      "text": "В точку. Во всех этих городах есть филиал",
+      "type": "system",
+      "playerActionIds": [
+        "ok-108"
+      ]
+    },
+    {
+      "id": "correct-cities-106",
+      "text": "'За мной!'. Вы заходите в лифт и поднимаетесь на третий этаж. Ты видишь большую комнату, заполненную множеством столов с мониторами и людьми, что-то яростно печатающих на компьютерах. Каждое рабочее место было по-своему оформлено, где-то была куча наклеенных стикеров с изображением разных персонажей из аниме, где-то стояла кружка с надписью 'Слезы разработчика'. Однако в комнате была общая деталь, здесь сильно пахло кофе.",
+      "type": "system",
+      "playerActionIds": [
+        "where-we-111",
+        "beautiful-112",
+        "what-happened-113"
+      ]
+    },
+    {
+      "id": "to-basement-110",
+      "text": "'Следуй за мной' Тебя заводят в какой-то подвал и закрывают за тобой дверь, кажется, ты где-то облажался. Вдруг тебя кто-то схватил сзади за плечо и сказал 'На сладенькое потянуло? Сладенькое заработать надо)))'.",
+      "type": "system",
+      "playerActionIds": [
+        "aaaaa-114",
+        "what-happened-115",
+        "love-116"
+      ]
+    },
+    {
+      "id": "dev-department-117",
+      "text": "Мы в отделе разработки. И похоже у них что-то произошло, пойду узнаю что происходит. Ты пока посиди в сторонке и подожди, я скоро подойду.",
+      "type": "system",
+      "playerActionIds": [
+        "sit-120",
+        "watch-121",
+        "ask-122"
+      ]
+    },
+    {
+      "id": "susadmin-118",
+      "text": "Да не ори ты. Я системный администратор, пытаюсь разобраться с проблемой.",
+      "type": "system",
+      "playerActionIds": [
+        "go-123",
+        "what-broken-124",
+        "no-mistake-125"
+      ]
+    },
+    {
+      "id": "door-119",
+      "text": "Бывают в жизни моменты, когда заходишь не в ту дверь))).",
+      "type": "system",
+      "playerActionIds": [
+        "go-123",
+        "what-broken-124",
+        "no-mistake-125"
+      ]
+    },
+    {
+      "id": "sit-wait-126",
+      "text": "Ты сидел и ждал, ждал, ждал... Люди бегали перед тобой и, почему-то, это вгоняло тебя в сон, ты закрыл глаза и неожиданно проснулся в своей кровати. Ты так и не узнал, что произошло.",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "try-watch-127",
+      "text": "Ты пытаешься посмотреть чем занимается программист. 'ЧТО ТЕБЕ НУЖНО!? НЕ ВИДИШЬ, Я ЗАНЯТ!' резко говорит он. ",
+      "type": "system",
+      "playerActionIds": [
+        "new-intern-130",
+        "dad-131",
+        "know-132"
+      ]
+    },
+    {
+      "id": "stop-cowboy-128",
+      "text": "СОЯТЬ КОВБОЙ!!! Тебя отправили сюда на каторг... ой мне на помощь. так что пока не закончим, ты никуда не уйдешь)",
+      "type": "system",
+      "playerActionIds": [
+        "what-broken-133"
+      ]
+    },
+    {
+      "id": "true-love-129",
+      "text": "Вы провели самую незабываемую ночь в своей жизни.(Вы играли в настолки. А Вы о чем подумали?!)",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "what-learn-134",
+      "text": "'А какую программу ты проходил в нашем учебном центре?'",
+      "type": "system",
+      "playerActionIds": [
+        "assembler-137",
+        "wizard-138",
+        "java-139"
+      ]
+    },
+    {
+      "id": "server-drop-135",
+      "text": "'У нас неожиданно упали сервера, и никто не знает почему'.",
+      "type": "system",
+      "playerActionIds": [
+        "sad-140"
+      ]
+    },
+    {
+      "id": "stupid-defence-136",
+      "text": "У нас стоит защитная система, я не могу вспомнить пароль, а если я его не угадаю, то все данные с сервера удалятся. Этот пароль - вроде год появления микросервесной архитектуры в проектах Neoflex. Не подскажешь год?",
+      "type": "system",
+      "playerActionIds": [
+        "ans-2016-141",
+        "ans-2018-142",
+        "ans-1991-143"
+      ]
+    },
+    {
+      "id": "joke-144",
+      "text": "'Иди шутить в другое место, не отвлекай!'",
+      "type": "system",
+      "playerActionIds": [
+        "ok-150"
+      ]
+    },
+    {
+      "id": "not-bad-145",
+      "text": "'Неплохо. Подойди к человеку за центральным столом, он введет в курс дела'.",
+      "type": "system",
+      "playerActionIds": [
+        "ok-151"
+      ]
+    },
+    {
+      "id": "not-in-time-146",
+      "text": "'Ну ты вовремя пришел, конечно. Спроси у человека за центральным столом'.",
+      "type": "system",
+      "playerActionIds": [
+        "ok-151"
+      ]
+    },
+    {
+      "id": "who-are-you-147",
+      "text": "'А ты что тут все спрашиваешь?'",
+      "type": "system",
+      "playerActionIds": [
+        "new-intern-130",
+        "dad-131",
+        "know-132"
+      ]
+    },
+    {
+      "id": "success-148",
+      "text": "Сисадмин вводит ваш ответ, момент... Наконец, на экране появляется надпись: 'Успешно! Вы вошли в систему.'",
+      "type": "system",
+      "playerActionIds": [
+        "sure-152",
+        "luck-152"
+      ]
+    },
+    {
+      "id": "not-success-149",
+      "text": "Сисадмин вводит ваш ответ, момент... Наконец, на экране появляется надпись: 'Успешно! Все данные удалены.'",
+      "type": "system",
+      "playerActionIds": [
+        "awkward-153"
+      ]
+    },
+    {
+      "id": "no-joke-154",
+      "text": "Твою карьеру комика разрушили(",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "what-doing-155",
+      "text": "Ты подходишь к человеку за центральным столом. Он осматривает тебя беглым взглядом и говорит 'Зачем пришёл?'",
+      "type": "system",
+      "playerActionIds": [
+        "dad-158",
+        "intern-159",
+        "solved-160"
+      ]
+    },
+    {
+      "id": "good-help-156",
+      "text": "Отлично. Ты мне очень помог. Вот тебе ключ от двери, за ней сразу увидишь лифт. Езжай на верхний этаж, там тебя ждет финал... ой, то есть босс, просто босс.",
+      "type": "system",
+      "playerActionIds": [
+        "good-thanks-161"
+      ]
+    },
+    {
+      "id": "bad-help-157",
+      "text": "Да уж, вышло действительно неловко.",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "direction-162",
+      "text": "'Пройди прямо, налево, направо, прямо, налево, налево и направо, а дальше прямо'",
+      "type": "system",
+      "playerActionIds": [
+        "thanks-165"
+      ]
+    },
+    {
+      "id": "java-dev-163",
+      "text": "Ты, наверное, тот самый Java разработчик?",
+      "type": "system",
+      "playerActionIds": [
+        "yes-166",
+        "probably-167"
+      ]
+    },
+    {
+      "id": "safer-164",
+      "text": "Ты ж наш спаситель! Какой твой вариант решения?",
+      "type": "system",
+      "playerActionIds": [
+        "back-version-168",
+        "off-on-169",
+        "spend-money-170"
+      ]
+    },
+    {
+      "id": "lost-end-171",
+      "text": "Ты идешь прямо, налево, направо, прямо... спустя 5 поворотов ты понимаешь что заблудился...",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "help-write-172",
+      "text": "Отлично! Нам как раз нужна помощь с написанием кода. Вот, садись за этот компьютер, допиши этот объект.",
+      "type": "system",
+      "playerActionIds": [
+        "lets-see-175",
+        "change-work-176"
+      ]
+    },
+    {
+      "id": "report-to-boss-173",
+      "text": "Надо попробовать. Отправляйся с докладом к боссу на последний этаж.",
+      "type": "system",
+      "playerActionIds": [
+        "ok-177"
+      ]
+    },
+    {
+      "id": "lost-money-174",
+      "text": "Твое гениальное решение обанкротило компанию, зато у тебя теперь 5 ТБ оперативной памяти",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "code-review-178",
+      "text": "Ты видишь, что у класса CompetenceСenterForMobileApplicationDevelopment уже заполнены все поля, в том числе список programmingLanguages - Swift, Objective-C, Kotlin и Java. Не заполнено только одно дефолтное поле - creationYear",
+      "type": "system",
+      "playerActionIds": [
+        "ans-2021-180",
+        "ans-2018-181",
+        "ans-1991-182"
+      ]
+    },
+    {
+      "id": "kopatich-song-179",
+      "text": "♫ ♪ Ууукуси меня, пчела!!!",
+      "type": "ending",
+      "playerActionIds": null
+    },
+    {
+      "id": "good-test-183",
+      "text": "'Отлично, давай протестируем...' Старший разработчик запускает приложение, оно билдится, и... Все отлично, заработало!",
+      "type": "system",
+      "playerActionIds": [
+        "good-185"
+      ]
+    },
+    {
+      "id": "bad-test-184",
+      "text": "'Отлично, давай протестируем...' Старший разработчик запускает приложение, но, к сожалению, оно падает, не забилдившись",
+      "type": "system",
+      "playerActionIds": [
+        "bad-186"
+      ]
+    },
+    {
+      "id": "boos-call-187",
+      "text": "Начальник вызывает тебя к себе!",
+      "type": "system",
+      "playerActionIds": [
+        "not-good-188"
+      ]
+    },
+    {
+      "id": "go-to-boss-189",
+      "text": "Вы поднимаетесь на последний этаж здания. Вы в предвкушении встречи с самым главным боссом этого места. Лифт остановился и двери открылись.",
+      "type": "system",
+      "playerActionIds": [
+        "step-into-unknown-190"
+      ]
+    },
+    {
+      "id": "end-191",
+      "text": "Поздравляю! Конец демо версии!",
       "type": "ending",
       "playerActionIds": null
     }
   ],
+
+
+
+
+
+
   "playerActions": [
     {
-      "id": "1",
-      "text": "Привет",
+      "id": "what-happen-1",
+      "text": "Что происходит?",
       "sysActions": [
+        {
+          "id": "joke-survive-9",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "who-you-2",
+      "text": "Кто вы?",
+      "sysActions": [
+        {
+          "id": "horse-coat-4",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "drill-back-3",
+      "text": "Сверлить его взглядом в ответ.",
+      "sysActions": [
+        {
+          "id": "drill-more-5",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "you-teacher-6",
+      "text": "Но Вы же преподаватель",
+      "sysActions": [
+        {
+          "id": "why-sleep-10",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "look-away-7",
+      "text": "Попробовать отвести взгляд",
+      "sysActions": [
+        {
+          "id": "why-sleep-10",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "continue-drill-8",
+      "text": "Продолжать сверлить.",
+      "sysActions": [
+        {
+          "id": "eyes-hurt-11",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "sorry-12",
+      "text": "Извините пожалуйста. Такого больше не повторится (￢_￢;)",
+      "sysActions": [
+        {
+          "id": "hackathon-16",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "look-drill-man-13",
+      "text": "Взгляд, сверлить, человек!",
+      "sysActions": [
+        {
+          "id": "legendary-battle-17",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "not-step-back-14",
+      "text": "Ни шагу назад, сверлим до конца!",
+      "sysActions": [
+        {
+          "id": "legendary-battle-17",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "king-hit-15",
+      "text": "Королевский... Гига... Дрель... Уда-а-ар!",
+      "sysActions": [
+        {
+          "id": "legendary-battle-17",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "paris-18",
+      "text": "Е-Е-Е движ Париж!!!",
+      "sysActions": [
+        {
+          "id": "participation-mandatory-21",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "what-wind-19",
+      "text": "Что еще за цифровой ветер?...",
+      "sysActions": [
+        {
+          "id": "participation-mandatory-21",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "continue-sleep-20",
+      "text": "Дальше спать",
+      "sysActions": [
+        {
+          "id": "sad-life-22",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "home-23",
+      "text": "Д-О-М-О-О-О-Й!!!",
+      "sysActions": [
+        {
+          "id": "fell-asleep-24",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "dream-study-25",
+      "text": "Смотреть сон про учебу",
+      "sysActions": [
+        {
+          "id": "dream-recursion-28",
+          "condition": [
+            {
+              "id": "dream-study-25",
+              "count": 3
+            }
+          ]
+        },
         {
           "id": "start",
           "condition": null
@@ -28,15 +852,981 @@
       ]
     },
     {
-      "id": "2",
-      "text": "Пока",
+      "id": "dream-elephant-26",
+      "text": "Смотреть сон про слона",
       "sysActions": [
         {
-          "id": "final",
-          "condition": [["start"], ["*"]]
-        },
+          "id": "town-man-stool-29",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "dream-neoflex-27",
+      "text": "Смотреть сон про Неофлекс",
+      "sysActions": [
         {
-          "id": "final",
+          "id": "office-35",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "not-buy-30",
+      "text": "Ответить, что не купишь",
+      "sysActions": [
+        {
+          "id": "buy-elephant-33",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "buy-31",
+      "text": "Ладно, куплю",
+      "sysActions": [
+        {
+          "id": "investigation-koloboks-34",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "in-door-32",
+      "text": "Зайти в дверь",
+      "sysActions": [
+        {
+          "id": "office-35",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "leave-office-36",
+      "text": "Выйти из офиса",
+      "sysActions": [
+        {
+          "id": "town-man-stool-29",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "forward-37",
+      "text": "Пойти дальше по коридору",
+      "sysActions": [
+        {
+          "id": "met-employee-39",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "stand-38",
+      "text": "Стоять на месте",
+      "sysActions": [
+        {
+          "id": "nothing-happen-40",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "job-yesterday-41",
+      "text": "Да, вчера устроился",
+      "sysActions": [
+        {
+          "id": "HR-dialog-44",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "dad-lunch-42",
+      "text": "Нет, папе обед несу",
+      "sysActions": [
+        {
+          "id": "to-dad-45",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "got-lost-43",
+      "text": "Я заблудился",
+      "sysActions": [
+        {
+          "id": "choose-direction-46",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "no-47",
+      "text": "Нет",
+      "sysActions": [
+        {
+          "id": "creation-Neoflex-56",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "sure-yes-48",
+      "text": "Уверенное ДА!",
+      "sysActions": [
+        {
+          "id": "creation-Neoflex-56",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "uncertain-yes-49",
+      "text": "Неуверенное ДА!",
+      "sysActions": [
+        {
+          "id": "creation-Neoflex-56",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "dev-bank-po-50",
+      "text": "Разработчиком ПО для автоматизации банковской деятельности",
+      "sysActions": [
+        {
+          "id": "lets-go-57",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "cleaning-51",
+      "text": "Клининг менеджером",
+      "sysActions": [
+        {
+          "id": "fun-lets-go-58",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "space-ship-52",
+      "text": "Строителем космических кораблей для полета на Марс",
+      "sysActions": [
+        {
+          "id": "space-adventure-59",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "to-Rio-53",
+      "text": "В Рио-де-Жанейро",
+      "sysActions": [
+        {
+          "id": "stranger-61",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "to-dev-54",
+      "text": "В отдел разработки",
+      "sysActions": [
+        {
+          "id": "why-62",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "to-server-55",
+      "text": "В серверную",
+      "sysActions": [
+        {
+          "id": "suspicion-63",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "dinner-60",
+      "text": "Я папе обед несу",
+      "sysActions": [
+        {
+          "id": "lets-go-57",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-2010-64",
+      "text": "2010",
+      "sysActions": [
+        {
+          "id": "wrong-72",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-2005-65",
+      "text": "2005",
+      "sysActions": [
+        {
+          "id": "correct-73",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-988-66",
+      "text": "988",
+      "sysActions": [
+        {
+          "id": "joke-74",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "smile-67",
+      "text": ":)",
+      "sysActions": [
+        {
+          "id": "dad-work-75",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "trust-68",
+      "text": "Доверить свою жизнь ему и отправиться вслед",
+      "sysActions": [
+        {
+          "id": "adventure-77",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "go-after-him-69",
+      "text": "Отправиться за ним",
+      "sysActions": [
+        {
+          "id": "adventure-77",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "internship-70",
+      "text": "Хочу начать проходить стажировку в Neoflex",
+      "sysActions": [
+        {
+          "id": "internship-city-78",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "turn-off-71",
+      "text": "Отключить. Они мешают мне спать.",
+      "sysActions": [
+        {
+          "id": "strange-end-79",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "smile-76",
+      "text": ":)",
+      "sysActions": [
+        {
+          "id": "to-basement-110",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "blin-80",
+      "text": "ну блин(",
+      "sysActions": [
+        {
+          "id": "to-project-89",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "smile-81",
+      "text": ":)",
+      "sysActions": [
+        {
+          "id": "to-project-89",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "luck-82",
+      "text": "повезло повезло",
+      "sysActions": [
+        {
+          "id": "to-project-89",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "of-course-83",
+      "text": "Конечно",
+      "sysActions": [
+        {
+          "id": "dad-department-90",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "of-course-84",
+      "text": "Разумеется",
+      "sysActions": [
+        {
+          "id": "dad-department-90",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "of-course-85",
+      "text": "Увы, но рассказывал",
+      "sysActions": [
+        {
+          "id": "dad-department-90",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "city-86",
+      "text": "Аграба",
+      "sysActions": [
+        {
+          "id": "wrong-city-91",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "city-87",
+      "text": "Магадан",
+      "sysActions": [
+        {
+          "id": "wrong-city-91",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "city-88",
+      "text": "Саратов",
+      "sysActions": [
+        {
+          "id": "correct-city-92",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "laziness-93",
+      "text": "Лежать на диване и получать денюжку",
+      "sysActions": [
+        {
+          "id": "laziness-end-102",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "develop-94",
+      "text": "Разрабатывать новые решения для бизнеса",
+      "sysActions": [
+        {
+          "id": "good-guy-103",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "write-cod-95",
+      "text": "Писать код",
+      "sysActions": [
+        {
+          "id": "good-guy-103",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "department-96",
+      "text": "Neoflex StonksWare",
+      "sysActions": [
+        {
+          "id": "to-basement-110",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "department-97",
+      "text": "Neoflex Datagram",
+      "sysActions": [
+        {
+          "id": "to-office-109",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "department-98",
+      "text": "Neoflex Reporting",
+      "sysActions": [
+        {
+          "id": "to-office-109",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "wrong-cities-99",
+      "text": "Саратов, Москва, Санкт-Петербург, Казань, Волгоград, Пермь, Ростов-На-Дону, Челябинск",
+      "sysActions": [
+        {
+          "id": "almost-104",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "wrong-cities-100",
+      "text": "Спрингфилд, Гравити Фолз, Шир, Бикини-Боттом",
+      "sysActions": [
+        {
+          "id": "almost-105",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "correct-cities-101",
+      "text": "Саратов, Москва, Санкт-Петербург, Нижний Новгород, Самара, Пенза, Воронеж, Краснодар",
+      "sysActions": [
+        {
+          "id": "correct-cities-106",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "forward-107",
+      "text": "Вперед, к новым вершинам!!!",
+      "sysActions": [
+        {
+          "id": "to-office-109",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ok-108",
+      "text": "Ок)",
+      "sysActions": [
+        {
+          "id": "to-office-109",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "where-we-111",
+      "text": "Где это мы?",
+      "sysActions": [
+        {
+          "id": "dev-department-117",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "beautiful-112",
+      "text": "Что за прекрасное место?",
+      "sysActions": [
+        {
+          "id": "dev-department-117",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "what-happened-113",
+      "text": "Что здесь происходит?",
+      "sysActions": [
+        {
+          "id": "dev-department-117",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "aaaaa-114",
+      "text": "АаАаАаАаАаАаА!!!!!",
+      "sysActions": [
+        {
+          "id": "susadmin-118",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "what-happened-115",
+      "text": "Что здесь происходит?",
+      "sysActions": [
+        {
+          "id": "door-119",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "love-116",
+      "text": "повернуться и сказать 'Ты моя сладость)))'",
+      "sysActions": [
+        {
+          "id": "true-love-129",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "sit-120",
+      "text": "Посидеть в сторонке",
+      "sysActions": [
+        {
+          "id": "sit-wait-126",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "watch-121",
+      "text": "Посмотреть что делает разработчик",
+      "sysActions": [
+        {
+          "id": "try-watch-127",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ask-122",
+      "text": "Спросить разработчика что происходит",
+      "sysActions": [
+        {
+          "id": "server-drop-135",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "go-123",
+      "text": "Ладно, ну я пойду...",
+      "sysActions": [
+        {
+          "id": "stop-cowboy-128",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "what-broken-124",
+      "text": "А что сломалось-то?",
+      "sysActions": [
+        {
+          "id": "stupid-defence-136",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "no-mistake-125",
+      "text": "Но в этот раз я не ошибся)))",
+      "sysActions": [
+        {
+          "id": "true-love-129",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "new-intern-130",
+      "text": "Я новый стажер, пришел работать",
+      "sysActions": [
+        {
+          "id": "what-learn-134",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "dad-131",
+      "text": "Я папу ищу",
+      "sysActions": [
+        {
+          "id": "not-in-time-146",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "know-132",
+      "text": "Я хотел узнать, что происходит",
+      "sysActions": [
+        {
+          "id": "server-drop-135",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "what-broken-133",
+      "text": "Ладно. А что сломалось-то?",
+      "sysActions": [
+        {
+          "id": "stupid-defence-136",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "assembler-137",
+      "text": "Assembler development",
+      "sysActions": [
+        {
+          "id": "joke-144",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "wizard-138",
+      "text": "Юного волшебника",
+      "sysActions": [
+        {
+          "id": "joke-144",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "java-139",
+      "text": "Java development",
+      "sysActions": [
+        {
+          "id": "not-bad-145",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "sad-140",
+      "text": "Печально(",
+      "sysActions": [
+        {
+          "id": "who-are-you-147",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-2016-141",
+      "text": "2016",
+      "sysActions": [
+        {
+          "id": "success-148",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-2018-142",
+      "text": "2018",
+      "sysActions": [
+        {
+          "id": "not-success-149",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-1991-143",
+      "text": "1991",
+      "sysActions": [
+        {
+          "id": "not-success-149",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ok-150",
+      "text": "Ну ладно(",
+      "sysActions": [
+        {
+          "id": "no-joke-154",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ok-151",
+      "text": "Ок",
+      "sysActions": [
+        {
+          "id": "what-doing-155",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "sure-152",
+      "text": "Я был уверен",
+      "sysActions": [
+        {
+          "id": "good-help-156",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "luck-152",
+      "text": "Ух... повезло-повезло",
+      "sysActions": [
+        {
+          "id": "good-help-156",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "awkward-153",
+      "text": "Упс... неловко вышло(",
+      "sysActions": [
+        {
+          "id": "bad-help-157",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "dad-158",
+      "text": "Я папу ищу",
+      "sysActions": [
+        {
+          "id": "direction-162",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "intern-159",
+      "text": "Я новый стажер, пришел работать",
+      "sysActions": [
+        {
+          "id": "java-dev-163",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "solved-160",
+      "text": "Я услышал, что у вас какие-то проблемы и пришел на помощь!",
+      "sysActions": [
+        {
+          "id": "safer-164",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "good-thanks-161",
+      "text": "Хорошо, спасибо",
+      "sysActions": [
+        {
+          "id": "go-to-boss-189",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "thanks-165",
+      "text": "Спасибо!",
+      "sysActions": [
+        {
+          "id": "lost-end-171",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "yes-166",
+      "text": "Да",
+      "sysActions": [
+        {
+          "id": "help-write-172",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "probably-167",
+      "text": "Наверное...",
+      "sysActions": [
+        {
+          "id": "help-write-172",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "back-version-168",
+      "text": "Давайте попробуем воспользоваться прежней рабочей версией сервера",
+      "sysActions": [
+        {
+          "id": "report-to-boss-173",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "off-on-169",
+      "text": "Вы пробовали включать и выключать?",
+      "sysActions": [
+        {
+          "id": "report-to-boss-173",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "spend-money-170",
+      "text": "Предлагаю потратить кучу денег на новое железо для сервера!",
+      "sysActions": [
+        {
+          "id": "lost-money-174",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "lets-see-175",
+      "text": "Хорошо, посмотрим...",
+      "sysActions": [
+        {
+          "id": "code-review-178",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "change-work-176",
+      "text": "Стоп. Знаете, что? Я вдруг понял, что больше не хочу быть программистом. Хочу быть пасечником",
+      "sysActions": [
+        {
+          "id": "kopatich-song-179",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ok-177",
+      "text": "Ок",
+      "sysActions": [
+        {
+          "id": "go-to-boss-189",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-2021-180",
+      "text": "Вписать 2021 год",
+      "sysActions": [
+        {
+          "id": "good-test-183",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-2018-181",
+      "text": "Вписать 2018 год",
+      "sysActions": [
+        {
+          "id": "bad-test-184",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "ans-1991-182",
+      "text": "Вписать 1995 год",
+      "sysActions": [
+        {
+          "id": "bad-test-184",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "good-185",
+      "text": "Оу ес!",
+      "sysActions": [
+        {
+          "id": "boos-call-187",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "bad-186",
+      "text": ":(",
+      "sysActions": [
+        {
+          "id": "boos-call-187",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "not-good-188",
+      "text": "Ой ой...",
+      "sysActions": [
+        {
+          "id": "go-to-boss-189",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "step-into-unknown-190",
+      "text": "Сделать шаг в неизвестность.",
+      "sysActions": [
+        {
+          "id": "end-191",
           "condition": null
         }
       ]
