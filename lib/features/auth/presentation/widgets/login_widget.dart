@@ -1,7 +1,9 @@
 import 'package:digital_wind/features/auth/data/entities/login_response.dart';
+import 'package:digital_wind/features/auth/presentation/components/auth_button.dart';
 import 'package:digital_wind/features/auth/presentation/components/text_input.dart';
 import 'package:digital_wind/features/core/components/player_message.dart';
 import 'package:digital_wind/features/core/components/system_message.dart';
+import 'package:digital_wind/features/menu/presentation/pages/main_menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../data/store/auth_store.dart';
@@ -62,8 +64,8 @@ class _LoginWidgetState extends State<LoginWidget> {
     _showUsernameField = false;
     _addMessage(value, isSystem: false, onCompleted: () async {
       await Future.delayed(const Duration(milliseconds: 300));
-      _addMessage('Введите пароль:');
       _showPasswordField = true;
+      _addMessage('Введите пароль:');
     });
   }
 
@@ -72,12 +74,18 @@ class _LoginWidgetState extends State<LoginWidget> {
       return;
     }
 
-    _addMessage(List.filled(_passwordController.text.length, '*').join(), isSystem: false);
     _showPasswordField = false;
+    _addMessage(List.filled(_passwordController.text.length, '*').join(), isSystem: false);
 
     await Provider.of<AuthStore>(context, listen: false).login(
       LoginRequest(username: _usernameController.text, password: _passwordController.text));
-
+    if (Provider.of(context, listen: true).isAuthenticated) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      Navigator.pop(context);
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) => const MainMenuPage())
+    );
+    }
   }
 
   @override
@@ -130,6 +138,16 @@ class _LoginWidgetState extends State<LoginWidget> {
             controller: _passwordController,
             handleEnter: _handleLogin,
           ),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: AuthButton(
+                text: 'Нет аккаунта? Зарегистрироватся',
+                onPressed: widget.onRegisterPressed,
+              ),
+          )
+        )
       ],
     );
   }

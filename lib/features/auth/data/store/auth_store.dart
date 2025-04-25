@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:digital_wind/features/auth/data/entities/login_response.dart';
 import 'package:digital_wind/features/auth/data/entities/register_request.dart';
-import 'package:digital_wind/features/core/entities/StoreStatus.dart';
+import 'package:digital_wind/features/core/entities/store_status.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../api/auth_api.dart';
@@ -30,6 +30,7 @@ class AuthStore extends ChangeNotifier {
       _status = StoreStatus.success;
       notifyListeners();
       
+      
     } catch (e) {
       //error during login
       _status = StoreStatus.error;
@@ -39,6 +40,7 @@ class AuthStore extends ChangeNotifier {
 
   Future<void> register(RegisterRequest request) async {
     try {
+      print("go");
       //loading
       _status = StoreStatus.loading;
       notifyListeners();

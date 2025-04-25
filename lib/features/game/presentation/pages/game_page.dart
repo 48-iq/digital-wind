@@ -1,17 +1,11 @@
-import 'package:digital_wind/features/auth/presentation/pages/register_page.dart';
+
+import 'package:digital_wind/features/core/widgets/app_header.dart';
+import 'package:digital_wind/features/game/presentation/widgets/game_widget.dart';
 import 'package:flutter/material.dart';
-import '../../../core/widgets/app_header.dart';
-import '../widgets/login_widget.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-  void _onRegisterPressed(context) {
-    Navigator.pop(context);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const RegisterPage())
-    );
-  }
+class GamePage extends StatelessWidget {
 
+  const GamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +20,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 32),
             Expanded(
               child: SingleChildScrollView(
-                child: LoginWidget(onRegisterPressed: () => _onRegisterPressed(context)),
+                child: GameWidget(),
               ),
             ),
           ],

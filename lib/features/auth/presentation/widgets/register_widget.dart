@@ -1,7 +1,11 @@
+import 'package:digital_wind/features/auth/data/entities/login_response.dart';
 import 'package:digital_wind/features/auth/data/entities/register_request.dart';
+import 'package:digital_wind/features/auth/presentation/components/auth_button.dart';
+import 'package:digital_wind/features/auth/presentation/components/text_input.dart';
+import 'package:digital_wind/features/core/components/player_message.dart';
+import 'package:digital_wind/features/core/components/system_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/components/typed_text.dart';
 import '../../data/store/auth_store.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -10,98 +14,90 @@ class RegisterWidget extends StatefulWidget {
   const RegisterWidget({super.key, required this.onLoginPressed});
 
   @override
-  _RegisterWidgetState createState() => _RegisterWidgetState();
+  State<RegisterWidget> createState() => _RegisterWidgetState();
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
-  final _usernameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
+  // username text input
+  final _usernameController = TextEditingController();
+  bool _showUsernameField = false;
+
+  //password text input
+  final _passwordController = TextEditingController();
+  bool _showPasswordField = false;
+
+  //email text input
+  final _emailController = TextEditingController();
+  bool _showEmailField = false;
+
+  // messages
   final List<Map<String, dynamic>> _messages = [];
-  String _currentInputType = 'username';
-  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _addSystemMessage('Введите имя пользователя:');
+    _addMessage('Введите имя пользователя:');
+    _showUsernameField = true;
   }
 
-  void _addSystemMessage(String text) {
-    _messages.add({
-      'text': text,
-      'isSystem': true,
-      'isTyping': true,
+  void _addMessage(String text, {bool isSystem = true, Function()? onCompleted}) {
+    String id = '${DateTime.now().millisecondsSinceEpoch}${_messages.length}';
+    setState(() {  
+      _messages.add({
+        'id': id,
+        'text': text,
+        'isSystem': isSystem,
+        'isTyping': true,
+        'onCompleted': () {
+          onCompleted?.call();
+          for (var i = 0; i < _messages.length; i++) {
+            if (_messages[i]['id'] == id) {
+              _messages[i]['isTyping'] = false;
+            }
+          }
+          setState(() {});
+        }
+      });
     });
-    setState(() {});
   }
 
-  void _addUserMessage(String text) {
-    _messages.add({
-      'text': text,
-      'isSystem': false,
-      'isTyping': false,
-    });
-    setState(() {});
-  }
-
-  void _completeTyping(int index) {
-    _messages[index]['isTyping'] = false;
-    setState(() {});
-  }
-
-  void _onFieldSubmitted(String value) async {
+  void _onUsernameSubmitted(String value) async {
     if (value.isEmpty) return;
-
-    _addUserMessage(value);
-
-    switch (_currentInputType) {
-      case 'username':
-        _usernameController.text = value;
-        await Future.delayed(const Duration(milliseconds: 300));
-        _addSystemMessage('Введите email:');
-        _currentInputType = 'email';
-        break;
-      case 'email':
-        _emailController.text = value;
-        await Future.delayed(const Duration(milliseconds: 300));
-        _addSystemMessage('Введите пароль:');
-        _currentInputType = 'password';
-        break;
-      case 'password':
-        _passwordController.text = value;
-        _addUserMessage(List.filled(value.length, '*').join());
-        _currentInputType = '';
-        _handleRegister();
-        break;
-    }
-
-    setState(() {});
+    await Future.delayed(const Duration(milliseconds: 300));
+    _showUsernameField = false;
+    _addMessage(value, isSystem: false, onCompleted: () async {
+      await Future.delayed(const Duration(milliseconds: 300));
+      _showEmailField = true;
+      _addMessage('Введите email:');
+    });
   }
 
-  Future<void> _handleRegister() async {
-    if (_usernameController.text.isEmpty ||
-        _passwordController.text.isEmpty ||
-        _emailController.text.isEmpty) {
+  void _onEmailSubmitted(String value) async {
+    if (value.isEmpty) return;
+    await Future.delayed(const Duration(milliseconds: 300));
+    _showEmailField = false;
+    _addMessage(value, isSystem: false, onCompleted: () async {
+      await Future.delayed(const Duration(milliseconds: 300));
+      _showPasswordField = true;
+      _addMessage('Введите пароль:');
+    });
+  }
+
+  Future<void> _handleRegister(String value) async {
+    if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
       return;
     }
 
-    setState(() {
-      _isLoading = true;
-    });
+    _showPasswordField = false;
+    _addMessage(List.filled(_passwordController.text.length, '*').join(), isSystem: false);
 
     await Provider.of<AuthStore>(context, listen: false).register(
-      RegisterRequest(
-        username: _usernameController.text,
-        email: _emailController.text,
-        password: _passwordController.text
-      )
-    );
+      RegisterRequest(username: _usernameController.text, 
+      password: _passwordController.text,
+      email: _emailController.text
+      ));
 
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   @override
@@ -109,7 +105,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // История сообщений
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: _messages
@@ -125,128 +120,53 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (message['isSystem'])
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                              text: '[',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                          TextSpan(
-                            text: 'система',
-                            style: const TextStyle(
-                                color: Colors.blue), // Синий цвет для системы
-                          ),
-                          const TextSpan(
-                              text: ']',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  if (!message['isTyping'] && !message['isSystem'])
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                              text: '[',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                          TextSpan(
-                            text: 'игрок',
-                            style: const TextStyle(
-                                color: Color(0xFFB91354)), // Розовый цвет для игрока
-                          ),
-                          const TextSpan(
-                              text: ']',
-                              style: TextStyle(color: Colors.white)
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  if (message['isTyping'])
-                    TypedText(
-                      text: message['text'],
-                      style: TextStyle(
-                        color: message['isSystem'] ? Colors.white : Colors
-                            .white,
-                        fontFamily: 'Courier',
-                      ),
-                      onCompleted: () => _completeTyping(index),
+                    SystemMessage(
+                      text: message['text'], 
+                      isTyping: message['isTyping'], 
+                      onCompleted: () => (message['onCompleted'] as Function?)?.call()
                     )
-                  else
-                    Text(
-                      message['isSystem']
-                          ? message['text']
-                          : '> ${message['text']}',
-                      style: TextStyle(
-                        color: message['isSystem'] ? Colors.white : Colors
-                            .white,
-                        fontFamily: 'Courier',
-                      ),
-                    ),
+                  else 
+                    PlayerMessage(
+                      text: message['text'], 
+                      isTyping: message['isTyping'], 
+                      onCompleted: () => (message['onCompleted'] as Function?)?.call()
+                    )
                 ],
               ),
             );
           }).toList(),
         ),
 
-        // Поле ввода
-        if (_currentInputType.isNotEmpty)
-          Row(
-            children: [
-              const Text(
-                '> ',
-                style: TextStyle(color: Colors.white, fontFamily: 'Courier'),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: _currentInputType == 'username'
-                      ? _usernameController
-                      : _currentInputType == 'email'
-                      ? _emailController
-                      : _passwordController,
-                  autofocus: true,
-                  obscureText: _currentInputType == 'password',
-                  keyboardType: _currentInputType == 'email' ? TextInputType
-                      .emailAddress : TextInputType.text,
-                  style: const TextStyle(
-                      color: Colors.white, fontFamily: 'Courier'),
-                  decoration: const InputDecoration(
-                    hintText: '', // Убираем hintText
-                    border: InputBorder.none,
-                  ),
-                  onSubmitted: _onFieldSubmitted,
-                ),
-              ),
-            ],
+        if (_showUsernameField)
+          TextInput(
+            obscureText: false,
+            controller: _usernameController,
+            handleEnter: _onUsernameSubmitted,
           ),
 
-        if (_isLoading)
-          const TypedText(
-            text: '[система]\nloading \\',
-            style: TextStyle(color: Colors.white),
-          ),
+        if (_showEmailField)
+          TextInput(
+            obscureText: false,
+            controller: _emailController,
+            handleEnter: _onEmailSubmitted,
+        ),
 
-        if (!_isLoading)
-          Align(
+        if (_showPasswordField)
+          TextInput(
+            obscureText: true,
+            controller: _passwordController,
+            handleEnter: _handleRegister,
+          ),
+        Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(top: 20.0),
-              child: OutlinedButton(
+              child: AuthButton(
+                text: 'Есть аккаунт? Войти',
                 onPressed: widget.onLoginPressed,
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Color(0xFFB91354)),
-                ),
-                child: const Text(
-                  'Уже есть аккаунт? Войти',
-                  style: TextStyle(color: Color(0xFFB91354)),
-                ),
               ),
-            ),
-          ),
+          )
+        )
       ],
     );
   }
