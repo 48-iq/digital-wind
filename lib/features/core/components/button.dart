@@ -4,18 +4,20 @@ class Button extends StatelessWidget {
   final String text;
   final Color borderColor;
   final VoidCallback onPressed;
+  final double spaceBetweenButtons;
 
   const Button({
     super.key,
     required this.text,
     required this.borderColor,
     required this.onPressed,
+    required this.spaceBetweenButtons
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
+      padding: EdgeInsets.symmetric(vertical: spaceBetweenButtons, horizontal: 13),
       child: SizedBox(
         width: double.infinity,
         child: OutlinedButton(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AppHeaderGear extends StatelessWidget {
-  final VoidCallback? onTap;
+import '../../menu/presentation/pages/quick_menu_page.dart';
 
-  const AppHeaderGear({super.key, this.onTap});
+class AppHeaderGear extends StatelessWidget {
+  const AppHeaderGear({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,12 @@ class AppHeaderGear extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             GestureDetector(
-              onTap: onTap,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const QuickMenuPage()),
+                );
+              },
               child: Image.asset(
                 'assets/images/logo_settings.png',
                 width: 42,

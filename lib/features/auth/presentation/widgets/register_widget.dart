@@ -6,6 +6,7 @@ import 'package:digital_wind/features/core/components/player_message.dart';
 import 'package:digital_wind/features/core/components/system_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../menu/presentation/pages/main_menu_page.dart';
 import '../../data/store/auth_store.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -92,12 +93,34 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     _showPasswordField = false;
     _addMessage(List.filled(_passwordController.text.length, '*').join(), isSystem: false);
 
-    await Provider.of<AuthStore>(context, listen: false).register(
-      RegisterRequest(username: _usernameController.text, 
-      password: _passwordController.text,
-      email: _emailController.text
-      ));
+    final authStore = Provider.of<AuthStore>(context, listen: false);
+    await authStore.register(
+        RegisterRequest(
+            username: _usernameController.text,
+            password: _passwordController.text,
+            email: _emailController.text
+        )
+    );
 
+    if (authStore.token != null) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainMenuPage())
+      );
+    } else {
+      _addMessage('Ошибка регистрации. Попробуйте снова...');
+      await Future.delayed(const Duration(seconds: 3));
+
+      _usernameController.clear();
+      _passwordController.clear();
+      _emailController.clear();
+      _messages.clear();
+
+      _addMessage('Введите имя пользователя:');
+      _showUsernameField = true;
+      setState(() {});
+    }
   }
 
   @override

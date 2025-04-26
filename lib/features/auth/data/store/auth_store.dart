@@ -60,5 +60,11 @@ class AuthStore extends ChangeNotifier {
     }
   }
 
+  Future<void> logout() async {
+    _token = null;
+    _status = StoreStatus.success;
+    notifyListeners();
+  }
+
   // fixed
 }

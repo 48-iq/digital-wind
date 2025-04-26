@@ -3,14 +3,7 @@ import '../../../core/widgets/app_header.dart';
 import '../widgets/quick_menu_widget.dart';
 
 class QuickMenuPage extends StatelessWidget {
-  final VoidCallback onContinuePressed;
-  final VoidCallback onExitPressed;
-
-  const QuickMenuPage({
-    super.key,
-    required this.onContinuePressed,
-    required this.onExitPressed,
-  });
+  const QuickMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +16,7 @@ class QuickMenuPage extends StatelessWidget {
             const AppHeader(),
             Padding(
               padding: const EdgeInsets.only(top: 40),
-              child: QuickMenuWidget(
-                onContinuePressed: onContinuePressed,
-                onExitPressed: onExitPressed,
-              ),
+              child: QuickMenuWidget(),
             ),
           ],
         ),

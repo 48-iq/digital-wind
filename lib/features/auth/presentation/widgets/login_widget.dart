@@ -77,14 +77,29 @@ class _LoginWidgetState extends State<LoginWidget> {
     _showPasswordField = false;
     _addMessage(List.filled(_passwordController.text.length, '*').join(), isSystem: false);
 
-    await Provider.of<AuthStore>(context, listen: false).login(
-      LoginRequest(username: _usernameController.text, password: _passwordController.text));
-    if (Provider.of(context, listen: true).isAuthenticated) {
+    final authStore = Provider.of<AuthStore>(context, listen: false);
+    await authStore.login(
+        LoginRequest(username: _usernameController.text, password: _passwordController.text)
+    );
+
+    if (authStore.token != null) {
       await Future.delayed(const Duration(milliseconds: 300));
       Navigator.pop(context);
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) => const MainMenuPage())
-    );
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MainMenuPage())
+      );
+    } else {
+      _addMessage('Ошибка входа. Попробуйте снова.');
+      await Future.delayed(const Duration(seconds: 3));
+
+      _usernameController.clear();
+      _passwordController.clear();
+      _messages.clear();
+
+      _addMessage('Введите имя пользователя:');
+      _showUsernameField = true;
+      setState(() {});
     }
   }
 
@@ -143,7 +158,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             child: Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: AuthButton(
-                text: 'Нет аккаунта? Зарегистрироватся',
+                text: 'Нет аккаунта? Зарегистрироваться',
                 onPressed: widget.onRegisterPressed,
               ),
           )
