@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/ApiConstants.dart';
-import '../entities/all_ending_request.dart';
-import '../entities/all_ending_response.dart';
+import '../entities/ending_request.dart';
+import '../entities/endings_response.dart';
 
 class EndingsApi {
   final http.Client client;
 
   EndingsApi({required this.client});
 
-  Future<AllEndingResponse> getAllEndings(String token) async {
+  Future<List<EndingsResponse>> getOpenedEndings(String token) async {
     final response = await client.get(
-      Uri.parse('${ApiConstants.baseUrl}/endings'),
+      Uri.parse('${ApiConstants.baseUrl}/api/v1/ending/opened'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -21,15 +21,18 @@ class EndingsApi {
     );
 
     if (response.statusCode == 200) {
-      return AllEndingResponse.fromJson(json.decode(response.body));
+      final List<dynamic> responseData = json.decode(response.body);
+      return responseData.map((json) => EndingsResponse.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load endings: ${response.body}');
+      throw Exception('Failed to load opened endings: ${response.body}');
     }
   }
 
-  Future<void> postEnding(AllEndingRequest request, String token) async {
+  Future<EndingsResponse> openEnding(String id, String token) async {
+    final request = EndingRequest(id);
+
     final response = await client.post(
-      Uri.parse('${ApiConstants.baseUrl}/endings'),
+      Uri.parse('${ApiConstants.baseUrl}/api/v1/ending/open'),
       body: json.encode(request.toJson()),
       headers: {
         'Content-Type': 'application/json',
@@ -37,8 +40,10 @@ class EndingsApi {
       },
     );
 
-    if (response.statusCode != 201) {
-      throw Exception('Failed to post ending: ${response.body}');
+    if (response.statusCode == 200) {
+      return EndingsResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to open ending: ${response.body}');
     }
   }
 }

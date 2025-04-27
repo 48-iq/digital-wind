@@ -32,10 +32,13 @@ class AppHeaderGear extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const QuickMenuPage()),
                 );
               },
-              child: Image.asset(
-                'assets/images/logo_settings.png',
-                width: 42,
-                fit: BoxFit.contain,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Image.asset(
+                  'assets/images/logo_settings.png',
+                  width: 42,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ],

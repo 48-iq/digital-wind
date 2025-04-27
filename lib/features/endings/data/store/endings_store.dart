@@ -1,85 +1,50 @@
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/entities/store_status.dart';
 import '../api/endings_api.dart';
-import '../entities/all_ending_request.dart';
+import '../entities/endings_response.dart';
 
 class EndingsStore extends ChangeNotifier {
-  final EndingsApi _endingsApi;
-  List<String> _endings = [];
-  bool _isLoading = false;
-  String? _error;
-  String? _token;
+  final EndingsApi endingApi;
+  List<
+      EndingsResponse> _openedEndings = [];
+  StoreStatus _status = StoreStatus.success;
 
-  List<String> get endings => _endings;
-  bool get isLoading => _isLoading;
-  String? get error => _error;
-  String? get token => _token;
+  EndingsStore({required this.endingApi});
 
-  EndingsStore({EndingsApi? endingsApi})
-      : _endingsApi = endingsApi ?? EndingsApi(client: http.Client());
+  List<EndingsResponse> get openedEndings => _openedEndings;
+  StoreStatus get status => _status;
 
-  Future<void> loadEndings(String token) async {
+  Future<void> fetchOpenedEndings(String token) async {
     try {
-      _startLoading();
-      _token = token;
-      final response = await _endingsApi.getAllEndings(token);
-      _endings = response.endings;
+      _status = StoreStatus.loading;
+      notifyListeners();
 
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setStringList('user_endings', _endings);
+      _openedEndings = await endingApi.getOpenedEndings(token);
 
+      _status = StoreStatus.success;
       notifyListeners();
     } catch (e) {
-      _handleError(e);
-      await _loadCachedEndings();
-    } finally {
-      _stopLoading();
-    }
-  }
-
-  Future<void> _loadCachedEndings() async {
-    final prefs = await SharedPreferences.getInstance();
-    final cachedEndings = prefs.getStringList('user_endings');
-    if (cachedEndings != null) {
-      _endings = cachedEndings;
+      _status = StoreStatus.error;
       notifyListeners();
+      rethrow;
     }
   }
 
-  Future<void> addEnding(String endingId, String token) async {
+  Future<void> openNewEnding(String id, String token) async {
     try {
-      _startLoading();
-      await _endingsApi.postEnding(AllEndingRequest(endingId), token);
+      _status = StoreStatus.loading;
+      notifyListeners();
 
-      if (!_endings.contains(endingId)) {
-        _endings.add(endingId);
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setStringList('user_endings', _endings);
-      }
+      final newEnding = await endingApi.openEnding(id, token);
+      _openedEndings.add(newEnding);
 
+      _status = StoreStatus.success;
       notifyListeners();
     } catch (e) {
-      _handleError(e);
-    } finally {
-      _stopLoading();
+      _status = StoreStatus.error;
+      notifyListeners();
+      rethrow;
     }
-  }
-
-  void _startLoading() {
-    _isLoading = true;
-    _error = null;
-    notifyListeners();
-  }
-
-  void _stopLoading() {
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  void _handleError(dynamic error) {
-    _error = error.toString();
-    notifyListeners();
   }
 }

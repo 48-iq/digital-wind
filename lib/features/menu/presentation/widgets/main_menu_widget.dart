@@ -5,7 +5,7 @@ import '../../../auth/presentation/pages/login_page.dart';
 import '../../../core/components/button.dart';
 import '../../../core/widgets/app_header.dart';
 import '../../../core/widgets/app_header_gear.dart';
-import '../../../endings/presentation/pages/all_endings_page.dart';
+import '../../../endings/presentation/pages/endings_page.dart';
 import '../../../game/presentation/pages/game_page.dart';
 
 class MainMenuWidget extends StatelessWidget {
@@ -19,7 +19,7 @@ class MainMenuWidget extends StatelessWidget {
   void onEndingsPressed(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const AllEndingsPage()),
+      MaterialPageRoute(builder: (context) => const EndingsPage()),
     );
   }
 
