@@ -1,0 +1,64 @@
+{
+  "endings": [
+    {
+      "id": "legendary-battle-17",
+      "title": "Легендарная битва"
+    },
+    {
+      "id": "sad-life-22",
+      "title": "Грустная жизнь"
+    },
+    {
+      "id": "dream-recursion-28",
+      "title": "Сон во сне"
+    },
+    {
+      "id": "investigation-koloboks-34",
+      "title": "Братья Колобки дошли по следу"
+    },
+    {
+      "id": "space-adventure-59",
+      "title": "Космические приключения"
+    },
+    {
+      "id": "adventure-77",
+      "title": "Невероятные приключения"
+    },
+    {
+      "id": "laziness-end-102",
+      "title": "Ну ты и лентяя:)"
+    },
+    {
+      "id": "sit-wait-126",
+      "title": "Ждун"
+    },
+    {
+      "id": "true-love-129",
+      "title": "Ночь любви и настолок"
+    },
+    {
+      "id": "no-joke-154",
+      "title": "Больше не шутим"
+    },
+    {
+      "id": "bad-help-157",
+      "title": "Упс... Неловко вышло"
+    },
+    {
+      "id": "lost-end-171",
+      "title": "Потеряшка"
+    },
+    {
+      "id": "lost-money-174",
+      "title": "Спидран по банкротству"
+    },
+    {
+      "id": "kopatich-song-179",
+      "title": "Ууукуси меня, пчела!!!"
+    },
+    {
+      "id": "end-191",
+      "title": "Конец демоверсии"
+    }
+  ]
+}

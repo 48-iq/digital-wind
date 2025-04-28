@@ -7,6 +7,8 @@ import 'package:digital_wind/features/game/presentation/components/player_action
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../pages/ending_page.dart';
+
 class GameWidget extends StatefulWidget {
 
   final ScrollController? scrollController;
@@ -122,6 +124,15 @@ class _GameWidgetState extends State<GameWidget> {
 
       for (var action in _actionHistory) {
         debugPrint('${action['type']}: ${action['id']}');
+      }
+
+      if (action['type'] == 'ending') {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => EndingPage(endingText: action['text']),
+          ),
+        );
+        return;
       }
 
       _addMessage(

@@ -24,3 +24,4 @@ flutter:
   assets:
     - assets/images/
     - assets/story.json
+    - assets/endings.json
