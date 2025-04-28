@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/widgets/app_header.dart';
 import '../widgets/endings_wIdget.dart';
 
-class AllEndingsPage extends StatelessWidget {
-  const AllEndingsPage({super.key});
+class EndingsPage extends StatelessWidget {
+  const EndingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

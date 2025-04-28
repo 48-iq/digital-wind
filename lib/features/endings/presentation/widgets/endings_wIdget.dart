@@ -27,6 +27,13 @@ class EndingsWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Button(
+            text: 'Выйти',
+            borderColor: Colors.blue,
+            onPressed: onExitPressed,
+            spaceBetweenButtons: 12,
+          ),
+          const SizedBox(height: 20),
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -40,13 +47,6 @@ class EndingsWidget extends StatelessWidget {
                 ),
               );
             },
-          ),
-          const SizedBox(height: 20),
-          Button(
-            text: 'Выйти',
-            borderColor: Colors.blue,
-            onPressed: onExitPressed,
-            spaceBetweenButtons: 12,
           ),
         ],
       ),

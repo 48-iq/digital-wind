@@ -12,7 +12,6 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthStore()),
-        ChangeNotifierProvider(create: (_) => EndingsStore()),
       ],
       child: const MyApp(),
     ),
