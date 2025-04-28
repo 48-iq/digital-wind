@@ -108,9 +108,9 @@ class _GameWidgetState extends State<GameWidget> {
         'id': actionId,
       });
 
-      if (action['type'] == 'ending') {
-        return;
-      }
+      // if (action['type'] == 'ending') {
+      //   return;
+      // }
 
       debugPrint('--- Action History ---');
       for (var action in _actionHistory) {
