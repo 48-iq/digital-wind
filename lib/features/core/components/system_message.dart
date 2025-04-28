@@ -6,9 +6,11 @@ class SystemMessage extends StatefulWidget {
   final String text;
   final bool isTyping;
   final VoidCallback? onCompleted;
+  final VoidCallback? onType;
 
   const SystemMessage({
     super.key,
+    this.onType,
     required this.text,
     required this.isTyping,
     required this.onCompleted
@@ -35,6 +37,7 @@ class _SystemMessageState extends State<SystemMessage> {
                 color: Colors.white,
                 fontFamily: 'Courier',
               ),
+              onType: widget.onType,
               onCompleted: widget.onCompleted
             )
           else
