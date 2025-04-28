@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/ApiConstants.dart';
@@ -13,7 +14,7 @@ class EndingsApi {
 
   Future<List<EndingsResponse>> getOpenedEndings(String token) async {
     final response = await client.get(
-      Uri.parse('${ApiConstants.baseUrl}/api/v1/ending/opened'),
+      Uri.parse('${ApiConstants.baseUrl}/ending/opened'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -30,10 +31,12 @@ class EndingsApi {
 
   Future<EndingsResponse> openEnding(String id, String token) async {
     final request = EndingRequest(id);
-
+    debugPrint(token);
     final response = await client.post(
-      Uri.parse('${ApiConstants.baseUrl}/api/v1/ending/open'),
-      body: json.encode(request.toJson()),
+
+      Uri.parse('${ApiConstants.baseUrl}/ending/open?id=$id' ),
+
+      //body: json.encode(request.toJson()),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
