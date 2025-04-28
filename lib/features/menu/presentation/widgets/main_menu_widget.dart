@@ -12,7 +12,7 @@ class MainMenuWidget extends StatelessWidget {
   void onPlayPressed(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const GamePage()),
+      MaterialPageRoute(builder: (context) => GamePage()),
     );
   }
 

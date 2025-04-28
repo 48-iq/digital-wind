@@ -52,7 +52,6 @@ class _LoginWidgetState extends State<LoginWidget> {
               _messages[i]['isTyping'] = false;
             }
           }
-          setState(() {});
         }
       });
     });

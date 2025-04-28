@@ -7,7 +7,8 @@ import '../../../core/widgets/app_header_gear.dart';
 
 class GamePage extends StatelessWidget {
 
-  const GamePage({super.key});
+  GamePage({super.key});
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class GamePage extends StatelessWidget {
             const SizedBox(height: 32),
             Expanded(
               child: SingleChildScrollView(
-                child: GameWidget(),
+                controller: scrollController,
+                child: GameWidget(scrollController: scrollController,),
               ),
             ),
           ],

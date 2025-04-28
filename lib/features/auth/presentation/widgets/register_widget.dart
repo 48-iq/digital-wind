@@ -57,7 +57,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               _messages[i]['isTyping'] = false;
             }
           }
-          setState(() {});
         }
       });
     });

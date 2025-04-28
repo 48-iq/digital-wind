@@ -6,18 +6,11 @@ import 'package:digital_wind/features/game/presentation/widgets/player_action_bu
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../core/components/button.dart';
-
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:digital_wind/features/core/components/player_message.dart';
-import 'package:digital_wind/features/core/components/system_message.dart';
-import '../../../core/components/button.dart';
-import '../../../menu/presentation/pages/main_menu_page.dart';
-
 class GameWidget extends StatefulWidget {
-  const GameWidget({super.key});
+
+  final ScrollController? scrollController;
+
+  const GameWidget({super.key, this.scrollController});
 
   @override
   State<StatefulWidget> createState() => _GameWidgetState();
@@ -96,6 +89,14 @@ class _GameWidgetState extends State<GameWidget> {
     return null;
   }
 
+  void _moveScrollDown() {
+    widget.scrollController?.animateTo(
+      widget.scrollController?.position.maxScrollExtent??0, 
+      duration: const Duration(milliseconds: 100), 
+      curve: Curves.linear
+    );
+  }
+
   void _showSystemAction(String actionId) {
     final action = _sysActions.firstWhere(
           (action) => action['id'] == actionId,
@@ -108,15 +109,9 @@ class _GameWidgetState extends State<GameWidget> {
         'id': actionId,
       });
 
-      // if (action['type'] == 'ending') {
-      //   return;
-      // }
-
-      debugPrint('--- Action History ---');
       for (var action in _actionHistory) {
         debugPrint('${action['type']}: ${action['id']}');
       }
-      debugPrint('----------------------');
 
       _addMessage(
         action['text'],
@@ -143,11 +138,9 @@ class _GameWidgetState extends State<GameWidget> {
         'id': actionId,
       });
 
-      debugPrint('--- Action History ---');
       for (var action in _actionHistory) {
         debugPrint('${action['type']}: ${action['id']}');
       }
-      debugPrint('----------------------');
 
       setState(() {
         _currentPlayerActionIds = null;
@@ -179,6 +172,7 @@ class _GameWidgetState extends State<GameWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ..._messages.map((message) {
@@ -191,6 +185,7 @@ class _GameWidgetState extends State<GameWidget> {
                   SystemMessage(
                     text: message['text'],
                     isTyping: message['isTyping'],
+                    onType: () => _moveScrollDown(),
                     onCompleted: () =>
                         (message['onCompleted'] as Function?)?.call(),
                   )
@@ -198,21 +193,24 @@ class _GameWidgetState extends State<GameWidget> {
                   PlayerMessage(
                     text: message['text'],
                     isTyping: message['isTyping'],
+                    onType: () => _moveScrollDown(),
                     onCompleted: () =>
                         (message['onCompleted'] as Function?)?.call(),
                   ),
               ],
             ),
           );
-        }).toList(),
+        }),
 
-        if (_currentPlayerActionIds != null)
+        if (_currentPlayerActionIds != null) 
           PlayerActionButtons(
+            onInit: _moveScrollDown,
             actionIds: _currentPlayerActionIds!,
             playerActions: _playerActions,
             onActionSelected: _selectPlayerAction,
           ),
       ],
+      
     );
   }
 }

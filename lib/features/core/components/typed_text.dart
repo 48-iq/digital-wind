@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class TypedText extends StatefulWidget {
@@ -5,6 +6,7 @@ class TypedText extends StatefulWidget {
   final Duration speed;
   final TextStyle? style;
   final VoidCallback? onCompleted;
+  final VoidCallback? onType;
 
   const TypedText({
     super.key,
@@ -12,6 +14,7 @@ class TypedText extends StatefulWidget {
     this.speed = const Duration(milliseconds: 50),
     this.style,
     this.onCompleted,
+    this.onType
   });
 
   @override
@@ -37,6 +40,8 @@ class _TypedTextState extends State<TypedText> {
         _currentIndex++;
       });
       Future.delayed(widget.speed, _typeText);
+      
+      widget.onType?.call();
     } else {
       widget.onCompleted?.call();
     }
