@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:digital_wind/features/core/components/player_message.dart';
 import 'package:digital_wind/features/core/components/system_message.dart';
-import 'package:digital_wind/features/game/presentation/widgets/player_action_buttons.dart';
+import 'package:digital_wind/features/game/presentation/components/game_messages.dart';
+import 'package:digital_wind/features/game/presentation/components/player_action_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,6 +18,8 @@ class GameWidget extends StatefulWidget {
 }
 
 class _GameWidgetState extends State<GameWidget> {
+
+
   List<dynamic> _sysActions = [];
   List<dynamic> _playerActions = [];
   List<Map<String, dynamic>> _messages = [];
@@ -51,9 +54,9 @@ class _GameWidgetState extends State<GameWidget> {
         'isTyping': true,
         'onCompleted': () {
           onCompleted?.call();
-          setState(() {
-            _messages.firstWhere((m) => m['id'] == id)['isTyping'] = false;
-          });
+          
+          _messages.firstWhere((m) => m['id'] == id)['isTyping'] = false;
+          
         }
       });
     });
@@ -95,6 +98,14 @@ class _GameWidgetState extends State<GameWidget> {
       duration: const Duration(milliseconds: 100), 
       curve: Curves.linear
     );
+  }
+
+  void _stopAllTyping() {
+    setState(() {
+      for (Map<String, dynamic> message in _messages) {
+        message['isTyping'] = false;
+      }
+    });
   }
 
   void _showSystemAction(String actionId) {
@@ -169,48 +180,45 @@ class _GameWidgetState extends State<GameWidget> {
     });
   }
 
+  bool _isAnyTyping() {
+    for (dynamic message in _messages) {
+      if (message['isTyping'] == true);
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    if (_isAnyTyping()) {
+      return 
       
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ..._messages.map((message) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (message['isSystem'])
-                  SystemMessage(
-                    text: message['text'],
-                    isTyping: message['isTyping'],
-                    onType: () => _moveScrollDown(),
-                    onCompleted: () =>
-                        (message['onCompleted'] as Function?)?.call(),
-                  )
-                else
-                  PlayerMessage(
-                    text: message['text'],
-                    isTyping: message['isTyping'],
-                    onType: () => _moveScrollDown(),
-                    onCompleted: () =>
-                        (message['onCompleted'] as Function?)?.call(),
-                  ),
-              ],
-            ),
-          );
-        }),
+      GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () => _stopAllTyping(),
+        child: GameMessages(
+          sysActions: _sysActions, 
+          playerActions: _playerActions, 
+          messages: _messages, 
+          currentPlayerActionIds: _currentPlayerActionIds, 
+          actionHistory: _actionHistory, 
+          moveScrollDown: _moveScrollDown, 
+          selectPlayerAction: _selectPlayerAction
+        )
+      );
+    }
+    else {
 
-        if (_currentPlayerActionIds != null) 
-          PlayerActionButtons(
-            onInit: _moveScrollDown,
-            actionIds: _currentPlayerActionIds!,
-            playerActions: _playerActions,
-            onActionSelected: _selectPlayerAction,
-          ),
-      ],
-      
-    );
+      return GameMessages(
+        sysActions: _sysActions, 
+        playerActions: _playerActions, 
+        messages: _messages, 
+        currentPlayerActionIds: _currentPlayerActionIds, 
+        actionHistory: _actionHistory, 
+        moveScrollDown: _moveScrollDown, 
+        selectPlayerAction: _selectPlayerAction
+      );
+    }
+
   }
 }

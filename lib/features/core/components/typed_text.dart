@@ -34,13 +34,13 @@ class _TypedTextState extends State<TypedText> {
   }
 
   void _typeText() {
-    if (_currentIndex < widget.text.length) {
+    if (_currentIndex < widget.text.length && mounted) {
+
       setState(() {
         _displayText += widget.text[_currentIndex];
         _currentIndex++;
       });
       Future.delayed(widget.speed, _typeText);
-      
       widget.onType?.call();
     } else {
       widget.onCompleted?.call();
