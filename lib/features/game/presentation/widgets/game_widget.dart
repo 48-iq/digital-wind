@@ -1,11 +1,13 @@
 import 'dart:convert';
 
-import 'package:digital_wind/features/core/components/player_message.dart';
-import 'package:digital_wind/features/core/components/system_message.dart';
 import 'package:digital_wind/features/game/presentation/components/game_messages.dart';
-import 'package:digital_wind/features/game/presentation/components/player_action_buttons.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import '../../../auth/data/store/auth_store.dart';
+import '../../../endings/data/store/endings_store.dart';
 
 class GameWidget extends StatefulWidget {
 
@@ -39,6 +41,13 @@ class _GameWidgetState extends State<GameWidget> {
       debugPrint('Error loading JSON: $e');
       _addMessage('Произошла ошибка при загрузке игры', isSystem: true);
     }
+  }
+
+  void _onOpenNewEnding(String endingId){
+    final endingsStore = Provider.of<EndingsStore>(context, listen: false);
+    final authStore = Provider.of<AuthStore>(context, listen: false);
+    final token = authStore.token;
+    endingsStore.openNewEnding(endingId, token!);
   }
 
   void _addMessage(String text,
@@ -119,6 +128,10 @@ class _GameWidgetState extends State<GameWidget> {
         'type': 'system',
         'id': actionId,
       });
+
+      if(action["type"] == "ending"){
+        _onOpenNewEnding(actionId);
+      }
 
       for (var action in _actionHistory) {
         debugPrint('${action['type']}: ${action['id']}');
